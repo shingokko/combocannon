@@ -1,3 +1,4 @@
+/*
 using UnityEngine;
 public class KeyCombo
 {
@@ -45,3 +46,4 @@ public class KeyCombo
         return false;
     }
 }
+*/
