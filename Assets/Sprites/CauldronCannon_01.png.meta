@@ -1,0 +1,175 @@
+fileFormatVersion: 2
+guid: d1a5f605e16761b4fbeeb134d700c95e
+timeCreated: 1454124325
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: CauldronCannon_01_0
+    21300002: CauldronCannon_01_1
+    21300004: CauldronCannon_01_2
+    21300006: CauldronCannon_01_3
+    21300008: CauldronCannon_01_4
+    21300010: CauldronCannon_01_5
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: CauldronCannon_01_0
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 211
+        width: 400
+        height: 344
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -61.668884, y: 98.03556}
+        - {x: -113.668884, y: 98.03556}
+        - {x: -113.668884, y: -97.96444}
+        - {x: 77.331116, y: -97.96444}
+        - {x: 77.331116, y: -21.96444}
+        - {x: 67.331116, y: 14.035561}
+    - name: CauldronCannon_01_1
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 211
+        width: 400
+        height: 344
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 79.16446, y: 93.03556}
+        - {x: 55.16446, y: 96.03556}
+        - {x: 20.16446, y: 6.0355606}
+        - {x: -67.83554, y: 98.03556}
+        - {x: -86.83554, y: 98.03556}
+        - {x: -113.83554, y: 72.03556}
+        - {x: -113.83554, y: -97.96444}
+        - {x: 97.16446, y: -97.96444}
+        - {x: 114.16446, y: -23.96444}
+        - {x: 114.16446, y: 78.03556}
+    - name: CauldronCannon_01_2
+      rect:
+        serializedVersion: 2
+        x: 1379
+        y: 211
+        width: 400
+        height: 344
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -96.0022, y: 98.03556}
+        - {x: -114.0022, y: 66.03556}
+        - {x: -114.0022, y: -87.96444}
+        - {x: -104.0022, y: -97.96444}
+        - {x: 76.9978, y: -97.96444}
+        - {x: 76.9978, y: -13.964439}
+        - {x: -64.0022, y: 98.03556}
+    - name: CauldronCannon_01_3
+      rect:
+        serializedVersion: 2
+        x: 1979
+        y: 211
+        width: 400
+        height: 344
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -71.66882, y: 80.03556}
+        - {x: -74.66882, y: 78.03556}
+        - {x: -106.66882, y: 46.03556}
+        - {x: -106.66882, y: -97.96444}
+        - {x: 77.33118, y: -97.96444}
+        - {x: 77.33118, y: -16.96444}
+        - {x: -36.668823, y: 80.03556}
+    - name: CauldronCannon_01_4
+      rect:
+        serializedVersion: 2
+        x: 2579
+        y: 211
+        width: 400
+        height: 344
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -40.83557, y: 71.03556}
+        - {x: -95.83557, y: 71.03556}
+        - {x: -107.83557, y: 45.03556}
+        - {x: -107.83557, y: -97.96444}
+        - {x: 76.16443, y: -97.96444}
+        - {x: 77.16443, y: -93.96444}
+        - {x: 77.16443, y: -33.96444}
+        - {x: 61.16443, y: -6.9644394}
+    - name: CauldronCannon_01_5
+      rect:
+        serializedVersion: 2
+        x: 3179
+        y: 211
+        width: 400
+        height: 344
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -38.002197, y: 80.03556}
+        - {x: -79.0022, y: 80.03556}
+        - {x: -108.0022, y: 66.03556}
+        - {x: -108.0022, y: -97.96444}
+        - {x: 70.9978, y: -97.96444}
+        - {x: 76.9978, y: -87.96444}
+        - {x: 76.9978, y: -28.96444}
+        - {x: 52.997803, y: 6.0355606}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

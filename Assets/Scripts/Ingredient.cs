@@ -2,12 +2,14 @@
 using System.Collections;
 
 public class Ingredient : MonoBehaviour {
-	public float moveSpeed = 30;
+	public float moveSpeed = 40;
+	public float zPos = -4;
 
 	GameObject _target;
 
 	void Start () {
-		_target = GameObject.Find("Gun");
+		_target = GameObject.Find("IngredientSpot");
+		transform.position = new Vector3(transform.position.x, transform.position.y, zPos);
 	}
 
 	bool V3Equal(Vector3 a, Vector3 b) {
