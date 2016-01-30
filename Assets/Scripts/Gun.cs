@@ -21,41 +21,79 @@ public class Gun : MonoBehaviour {
 	IList<KeyType> _keys;
 	IList<KeySequence> _keySequences;
 
-	//Enemies
-	GameObject enemy = null;
+	GameObject ingredientA;
+	GameObject ingredientB;
+	GameObject ingredientC;
+	GameObject ingredientD;
+	GameObject smoke;
+	GameObject boneBullet;
+	GameObject plantBullet;
+	GameObject mineralBullet;
+	GameObject fluidBullet;
+	GameObject boneMachineGun;
+	GameObject plantMachineGun;
+	GameObject mineralMachineGun;
+	GameObject fluidMachineGun;
+	GameObject blueBullet;
+	GameObject flames;
+	
+	// Enemies
 	public int respawnTime = 300;
-	private int counter;
-	List<EnemyStats> enemyStatsList = new List<EnemyStats>();
+	GameObject _enemy = null;
+	int _counter;
+	IList<EnemyStats> _enemyStatsList;
 
 	void Start () {
 		_barrel = transform.Find("Barrel").GetComponent<Animator>();
 		_cauldron = GameObject.Find("Cauldron").GetComponent<Animator>();
 
+		_enemyStatsList = new List<EnemyStats>();
 		_keys = new List<KeyType>();
 		_keySequences = Preferences.Instance.RecipeList;
+
+		LoadPrefabs();
+
+		initializeEnemyList();
+		RandomlySummon();
 	}
 	
+	void LoadPrefabs() {
+		ingredientA = (GameObject)Resources.Load("IngredientA");
+		ingredientB = (GameObject)Resources.Load("IngredientB");
+		ingredientC = (GameObject)Resources.Load("IngredientC");
+		ingredientD = (GameObject)Resources.Load("IngredientD");
+		smoke = (GameObject)Resources.Load("Smoke");
+		boneBullet = (GameObject)Resources.Load("BoneBullet");
+		plantBullet = (GameObject)Resources.Load("PlantBullet");
+		mineralBullet = (GameObject)Resources.Load("MineralBullet");
+		fluidBullet = (GameObject)Resources.Load("BlueBullet");
+		boneMachineGun = (GameObject)Resources.Load("BoneMachineGun");
+		plantMachineGun = (GameObject)Resources.Load("PlantMachineGun");
+		mineralMachineGun = (GameObject)Resources.Load("MineralMachineGun");
+		fluidMachineGun = (GameObject)Resources.Load("FluidMachineGun");
+		blueBullet = (GameObject)Resources.Load("BlueBullet");
+		flames = (GameObject)Resources.Load("Flames");
+	}
+
 	void SpawnIngredient(KeyType key) {
         if (key == KeyType.Unknown && key == KeyType.Trigger) { return; }
 
         GameObject ingredient = null;
 
-        int IngredientVersion = UnityEngine.Random.Range(1, 3);
-
     	if (key == KeyType.A) {
-    		ingredient = (GameObject)Resources.Load("IngredientA_" + IngredientVersion);
+    		ingredient = ingredientA;
     	}
 
     	if (key == KeyType.B) {
-    		ingredient = (GameObject)Resources.Load("IngredientB_" + IngredientVersion);
+    		ingredient = ingredientB;
     	}
 
     	if (key == KeyType.C) {
-    		ingredient = (GameObject)Resources.Load("IngredientC_" + IngredientVersion);
+    		ingredient = ingredientC;
     	}
 
     	if (key == KeyType.D) {
-    		ingredient = (GameObject)Resources.Load("IngredientD_" + IngredientVersion);
+    		ingredient = ingredientD;
     	}
 
     	if (ingredient != null) {
@@ -120,7 +158,6 @@ public class Gun : MonoBehaviour {
 
 	        if (_currentTime > _allowedTime) {
 	        	if (keySequenceIsValidSoFar) {
-	    			var smoke = (GameObject)Resources.Load("Smoke");
 	    			Instantiate(smoke);
 				}
 
@@ -165,41 +202,37 @@ public class Gun : MonoBehaviour {
 	        if (_currentDelay > _delayActionBy) {
 
 	        	switch (_actionName) {
-	        		case "Action 1":
-		    			var bullet = (GameObject)Resources.Load("BlueBullet");
-		    			Instantiate(bullet);
-
-		    			if (EnemyHealth.Instance.currentHealth>=0) {
-		    				EnemyHealth.Instance.currentHealth -= 1;
-		    			}
-						else {
-		    				EnemyHealth.Instance.currentHealth = 0;
-		    			}
-		    			
-
+	        		case "Bone Bullet":
+		    			Instantiate(boneBullet);
+	    				ReduceEnemyHealth(2);
 	        			break;
-        			case "Action 2":
-		    			var flames = (GameObject)Resources.Load("Flames");
-		    			Instantiate(flames);
-
-		    			if (EnemyHealth.Instance.currentHealth>=0) {
-		    				EnemyHealth.Instance.currentHealth -= 2;
-		    			}
-						else {
-		    				EnemyHealth.Instance.currentHealth = 0;
-		    			}
-
+        			case "Plant Bullet":
+		    			Instantiate(plantBullet);
+	    				ReduceEnemyHealth(2);
         				break;
-    				case "Action 3":
-		    			var bullet3 = (GameObject)Resources.Load("BlueBullet");
-		    			Instantiate(bullet3);
-
-		    			if (EnemyHealth.Instance.currentHealth>=0) {
-		    				EnemyHealth.Instance.currentHealth -= 3;
-		    			}
-						else {
-		    				EnemyHealth.Instance.currentHealth = 0;
-		    			}
+    				case "Mineral Bullet":
+		    			Instantiate(mineralBullet);
+	    				ReduceEnemyHealth(2);
+    					break;
+    				case "Fluid Bullet":
+		    			Instantiate(fluidBullet);
+	    				ReduceEnemyHealth(2);
+    					break;
+    				case "Bone Machine Gun":
+		    			Instantiate(boneMachineGun);
+	    				ReduceEnemyHealth(4);
+    					break;
+    				case "Plant Machine Gun":
+		    			Instantiate(plantMachineGun);
+	    				ReduceEnemyHealth(4);
+    					break;
+    				case "Mineral Machine Gun":
+		    			Instantiate(mineralMachineGun);
+	    				ReduceEnemyHealth(4);
+    					break;
+    				case "Fluid Machine Gun":
+		    			Instantiate(fluidMachineGun);
+	    				ReduceEnemyHealth(4);
     					break;
 					default:
 						break;
@@ -209,6 +242,15 @@ public class Gun : MonoBehaviour {
 				_currentDelay = 0;
 				_actionName = string.Empty;
 	        }
+		}
+	}
+
+	void ReduceEnemyHealth(int reduceBy) {
+		if (EnemyHealth.Instance.currentHealth >= 0) {
+			EnemyHealth.Instance.currentHealth -= reduceBy;
+		}
+		else {
+			EnemyHealth.Instance.currentHealth = 0;
 		}
 	}
 
@@ -233,29 +275,30 @@ public class Gun : MonoBehaviour {
 		TriggerAction();
 
 		//Respawn
-		if(EnemyHealth.Instance.currentHealth <= 0){
-			counter += 1;
+		if (EnemyHealth.Instance.currentHealth <= 0) {
+			_counter += 1;
 
-			if(counter == respawnTime){
-				if(GameData.Instance.score % 1000 == 0){
+			if (_counter == respawnTime) {
+				if (GameData.Instance.score % 1000 == 0) {
 					summon(5);
-				}else{
+				}
+				else {
 					summon(UnityEngine.Random.Range(1, 5));
 				}
 				
-				counter = 0;
+				_counter = 0;
 			}
-			
 		}
 	}
 
-	public void summon(int enemyNum){
-		String enemyName = "";
+	public void RandomlySummon() {
+		summon(UnityEngine.Random.Range(1, 5));
+	}
 
-		switch(enemyNum){
-			case 1:
-				enemyName = "Monster1";
-				break;
+	public void summon(int enemyNum) {
+		var enemyName = string.Empty;
+
+		switch (enemyNum) {
 			case 2:
 				enemyName = "Monster2";
 				break;
@@ -268,21 +311,23 @@ public class Gun : MonoBehaviour {
 			case 5:
 				enemyName = "Monster5";
 				break;
+			default:
+				enemyName = "Monster1";
+				break;	
 		}
 
+		EnemyHealth.Instance.maxHealth = _enemyStatsList[enemyNum - 1].getHealth();
+		EnemyHealth.Instance.currentHealth = _enemyStatsList[enemyNum - 1].getHealth();
 
-		EnemyHealth.Instance.maxHealth = enemyStatsList[enemyNum - 1].getHealth();
-		EnemyHealth.Instance.currentHealth = enemyStatsList[enemyNum - 1].getHealth();
-
-		enemy = (GameObject)Resources.Load(enemyName);
-		Instantiate(enemy, new Vector3(-0.4325213f, 0.0f, 0), Quaternion.identity);
+		_enemy = (GameObject)Resources.Load(enemyName);
+		Instantiate(_enemy, new Vector3(-0.4325213f, 0.0f, 0), Quaternion.identity);
 	}
 
-	public void initializeEnemyList(){
-		enemyStatsList.Add(new EnemyStats(10));
-		enemyStatsList.Add(new EnemyStats(20));
-		enemyStatsList.Add(new EnemyStats(15));
-		enemyStatsList.Add(new EnemyStats(10));
-		enemyStatsList.Add(new EnemyStats(50));
+	public void initializeEnemyList() {
+		_enemyStatsList.Add(new EnemyStats(10));
+		_enemyStatsList.Add(new EnemyStats(20));
+		_enemyStatsList.Add(new EnemyStats(15));
+		_enemyStatsList.Add(new EnemyStats(10));
+		_enemyStatsList.Add(new EnemyStats(50));
 	}
 }

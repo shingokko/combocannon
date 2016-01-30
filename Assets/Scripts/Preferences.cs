@@ -20,17 +20,37 @@ public class Preferences : Singleton<Preferences> {
 
 			new KeySequence
 			(
-				"Plant Bullet", new KeyType[] { KeyType.B, KeyType.A, KeyType.Trigger }, Element.Bone, Element.Plant
+				"Plant Bullet", new KeyType[] { KeyType.A, KeyType.A, KeyType.Trigger }, Element.Plant, Element.Plant
 			),
 
 			new KeySequence
 			(
-				"Fluid Bullet", new KeyType[] { KeyType.B, KeyType.D, KeyType.Trigger }, Element.Bone, Element.Fluid
+				"Fluid Bullet", new KeyType[] { KeyType.D, KeyType.D, KeyType.Trigger }, Element.Bone, Element.Fluid
 			),
 
 			new KeySequence
 			(
-				"Mineral Bullet", new KeyType[] { KeyType.B, KeyType.C, KeyType.Trigger},  Element.Bone, Element.Mineral
+				"Mineral Bullet", new KeyType[] { KeyType.C, KeyType.C, KeyType.Trigger},  Element.Bone, Element.Mineral
+			),
+
+			new KeySequence
+			(
+				"Bone Machine Gun", new KeyType[] { KeyType.B, KeyType.B, KeyType.B, KeyType.Trigger }, Element.Bone, Element.Bone
+			),
+
+			new KeySequence
+			(
+				"Plant Machine Gun", new KeyType[] { KeyType.A, KeyType.A, KeyType.A, KeyType.Trigger }, Element.Bone, Element.Bone
+			),
+
+			new KeySequence
+			(
+				"Fluid Machine Gun", new KeyType[] { KeyType.D, KeyType.D, KeyType.D, KeyType.Trigger }, Element.Bone, Element.Bone
+			),
+
+			new KeySequence
+			(
+				"Mineral Machine Gun", new KeyType[] { KeyType.C, KeyType.C, KeyType.C, KeyType.Trigger }, Element.Bone, Element.Bone
 			),
 		};
 
