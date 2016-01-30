@@ -15,6 +15,7 @@ public class Monster : MonoBehaviour {
 	public int attackSpeed;
 	public int stunDamage;
 
+
 	
 	// Use this for initialization
 	void Start () {
@@ -94,6 +95,7 @@ public class Monster : MonoBehaviour {
 			}else{
 				PlayerHealth.Instance.currentHealth -= attackStats;
 			}
+
 			
 		}else if(counter == 100 && attack){
 			attack = false;

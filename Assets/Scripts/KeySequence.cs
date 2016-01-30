@@ -3,14 +3,16 @@ using System.Collections.Generic;
 
 public class KeySequence
 {
-    public Element AttackType;
+    public Element Primary;
+    public Element Secondary;
 	public string name;
     KeyType[] _keys;
 
-    public KeySequence(string name, KeyType[] keys) {
+    public KeySequence(string name, KeyType[] keys, Element prim, Element sec) {
     	this.name = name;
         _keys = keys;
-        AttackType = calculateAttackType();
+        Primary = prim;
+        Secondary = sec;
 
     }
 

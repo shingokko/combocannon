@@ -29,10 +29,11 @@ public class Gun : MonoBehaviour {
 
 	void Start () {
 		_barrel = transform.Find("Barrel").GetComponent<Animator>();
-		_cauldron = transform.Find("Cauldron").GetComponent<Animator>();
+		_cauldron = GameObject.Find("Cauldron").GetComponent<Animator>();
 
 		_keys = new List<KeyType>();
 
+<<<<<<< HEAD
 		_keySequences = new List<KeySequence>
 		{
 			new KeySequence
@@ -57,6 +58,9 @@ public class Gun : MonoBehaviour {
 		initializeEnemyList();
 		summon(UnityEngine.Random.Range(1, 5));
 
+=======
+		_keySequences = Preferences.Instance.RecipeList;
+>>>>>>> 213a54b29a3071b542d2c4d55798b2ca1ff79c57
 	}
 	
 	void SpawnIngredient(KeyType key) {
@@ -140,7 +144,6 @@ public class Gun : MonoBehaviour {
 		if (_trackingKeys) {
 	        _currentTime += Time.deltaTime;
 
-	        // gone over the allowed time to complete a key sequence
 	        if (_currentTime > _allowedTime) {
 	        	if (keySequenceIsValidSoFar) {
 	    			var smoke = (GameObject)Resources.Load("Smoke");
@@ -153,7 +156,6 @@ public class Gun : MonoBehaviour {
         		SetIdle();
 	        }
 	        else {
-	        	// there's still time, and the key sequence is valid so far
 				if (keySequenceIsValidSoFar) {
 					OpenCauldron();
 		        	SpawnIngredient(keyPressed);
@@ -164,10 +166,10 @@ public class Gun : MonoBehaviour {
 
 	void SetIdle() {
 		_barrel.Play("idle");
-		_barrel.speed = 1;
+		_barrel.speed = 0;
 
 		_cauldron.Play("idle");
-		_cauldron.speed = 1;
+		_cauldron.speed = 0;
 	}
 
 	void OpenCauldron() {

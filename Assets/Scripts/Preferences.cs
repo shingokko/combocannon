@@ -15,20 +15,23 @@ public class Preferences : Singleton<Preferences> {
 		{
 			new KeySequence
 			(
-				"Action 1", new KeyType[] { KeyType.A, KeyType.B, KeyType.Trigger } // action 1
+				"Bone Bullet", new KeyType[] { KeyType.B, KeyType.B, KeyType.Trigger }, Element.Bone, Element.Bone
 			),
+
 			new KeySequence
 			(
-				"Action 2", new KeyType[] { KeyType.A, KeyType.B, KeyType.C, KeyType.Trigger } // action 2
+				"Plant Bullet", new KeyType[] { KeyType.B, KeyType.A, KeyType.Trigger }, Element.Bone, Element.Plant
 			),
+
 			new KeySequence
 			(
-				"Action 3", new KeyType[] { KeyType.A, KeyType.B, KeyType.C, KeyType.D, KeyType.Trigger } // action 3
+				"Fluid Bullet", new KeyType[] { KeyType.B, KeyType.D, KeyType.Trigger }, Element.Bone, Element.Fluid
 			),
+
 			new KeySequence
 			(
-				"Action 3", new KeyType[] { KeyType.A, KeyType.A, KeyType.A, KeyType.Trigger } // action 4
-			)
+				"Mineral Bullet", new KeyType[] { KeyType.B, KeyType.C, KeyType.Trigger},  Element.Bone, Element.Mineral
+			),
 		};
 
 	}
