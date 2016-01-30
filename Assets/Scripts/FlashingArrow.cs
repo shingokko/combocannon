@@ -2,28 +2,30 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
+/*
+Author: Arran
+*/
 public class FlashingArrow : MonoBehaviour {
-	public GameObject Link;
-	public int period = 10;
+	public Listable Link;
+	public int period = 10; //How long the flash should last for. 10 is equivalent to 10 ticks on 10 ticks off
 	private int count = 0;
-	private bool flash = true;
 
 	public Renderer rend;
     
     void Start() {
         rend = GetComponent<Renderer>();
-        rend.enabled = true;
+        rend.enabled = false;
     }
 
 	void Update() {
-		if (Link.GetComponent<ConfigKeyInput>().selected) {
-			count = (count + 1) % period;
+		if (Link.getSelect()) {
+			count = (count + 1) % period;	
 			if (count == 0) {
-				rend.enabled = !rend.enabled;
+				rend.enabled = !rend.enabled; //every period the render is switched on and off
 			}
 		} else {
-			if (!rend.enabled) {
-				rend.enabled = true;
+			if (rend.enabled) {
+				rend.enabled = false;
 			}
 		}
 	}

@@ -11,14 +11,4 @@ public class KeyClass : MonoBehaviour {
 		currentKeyCode = newKeyCode;
 	}
 
-	void Update() {
-		if ( _selected ) {
-			// Some change to the GUI?
-		}
-	}
-
-	void OnMouseDown() {
-		transform.localScale *= 0.9f;
-		_selected = true;
-	}
 }

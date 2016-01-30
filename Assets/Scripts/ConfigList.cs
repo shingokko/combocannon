@@ -4,7 +4,7 @@ using System.Collections;
 
 public class ConfigList : MonoBehaviour {
 	//Placeholder, this allows multiple to be selected at one time. Need to implement list
-	public GameObject[] KeyBindingList;
+	public Listable[] KeyBindingList;
 	public int index = 0;
 
 
@@ -35,9 +35,9 @@ public class ConfigList : MonoBehaviour {
 	private void Reselect() {
 		for (int i = 0; i < KeyBindingList.Length; i++) {
 			if (i == index)
-				KeyBindingList[i].GetComponent<ConfigKeyInput>().setSelect(true);
+				(KeyBindingList[i]).setSelect(true);
 			else
-				KeyBindingList[i].GetComponent<ConfigKeyInput>().setSelect(false);
+				(KeyBindingList[i]).setSelect(false);
 		}
 	}
 }

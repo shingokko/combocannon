@@ -2,11 +2,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class ConfigKeyInput : MonoBehaviour {
-	public KeyType keyMap = KeyType.A;
+public class ConfigKeyInput : Listable {
+	public KeyType keyMap = KeyType.A; //Provided by the class specific instance in the config menu
 	public bool selected = false;
+
+	void Start() {
+		GetComponent<TextMesh>().text = Preferences.Instance.getKeyCode(keyMap).ToString();
+	}
 	
-	public void setSelect(bool select) {
+	public override void setSelect(bool select) {
 		if (select != selected) {
 			if (select) {
 				transform.localScale /= 0.9f;
@@ -16,6 +20,10 @@ public class ConfigKeyInput : MonoBehaviour {
 				selected = false;
 			}
 		}
+	}
+
+	public override bool getSelect() {
+		return selected;
 	}
  
 	void OnGUI() {
@@ -31,8 +39,10 @@ public class ConfigKeyInput : MonoBehaviour {
         
     }
 
+    //Used by the user in the Config screen to remap a key.
+
 	void UpdateBinding(KeyCode key) {
-		KeyClassReader.setPlayerKey(keyMap,	key);
+		Preferences.Instance.setKeyCode(keyMap, key);
 		GetComponent<TextMesh>().text = key.ToString();
 	}
 
