@@ -118,9 +118,22 @@ public class Gun : MonoBehaviour {
         	}
         }
 
+        var keySequenceIsValidSoFar = false;
+		foreach (var keySequence in _keySequences) {
+	        if (keySequence.CheckSoFar(_keys)) {
+        		keySequenceIsValidSoFar = true;
+	        	break;
+	        }
+		}
+
 		if (_trackingKeys) {
 	        _currentTime += Time.deltaTime;
 	        if (_currentTime > _allowedTime) {
+	        	if (keySequenceIsValidSoFar) {
+	    			var smoke = (GameObject)Resources.Load("Smoke");
+	    			Instantiate(smoke);
+				}
+
 				_keys = new List<KeyType>();
 				_currentTime = 0;
 
@@ -128,16 +141,8 @@ public class Gun : MonoBehaviour {
 	        }
 		}
 
-        var doAnimateIngredient = false;
-		foreach (var keySequence in _keySequences) {
-	        if (keySequence.CheckSoFar(_keys)) {
-        		OpenCauldron();
-	        	doAnimateIngredient = true;
-	        	break;
-	        }
-		}
-
-		if (doAnimateIngredient) {
+		if (keySequenceIsValidSoFar) {
+			OpenCauldron();
         	SpawnIngredient(keyPressed);
 		}
 	}
