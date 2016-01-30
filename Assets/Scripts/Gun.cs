@@ -119,13 +119,15 @@ public class Gun : MonoBehaviour {
 	        if (_currentTime > _allowedTime) {
 				_keys = new List<KeyType>();
 				_currentTime = 0;
+
+        		SetIdle();
 	        }
 		}
 
         var doAnimateIngredient = false;
 		foreach (var keySequence in _keySequences) {
 	        if (keySequence.CheckSoFar(_keys)) {
-        		_cauldron.Play("open");
+        		OpenCauldron();
 	        	doAnimateIngredient = true;
 	        	break;
 	        }
@@ -134,6 +136,27 @@ public class Gun : MonoBehaviour {
 		if (doAnimateIngredient) {
         	SpawnIngredient(keyPressed);
 		}
+	}
+
+	void SetIdle() {
+		_barrel.Play("idle");
+		_barrel.speed = 0;
+
+		_cauldron.Play("idle");
+		_cauldron.speed = 0;
+	}
+
+	void OpenCauldron() {
+		_barrel.Play("fire", -1, 0.2f);
+		_barrel.speed = 0;
+
+		_cauldron.Play("open", -1, 0.2f);
+		_cauldron.speed = 0;
+	}
+
+	void CloseCauldron() {
+		_barrel.speed = 1;
+		_cauldron.speed = 1;
 	}
 
 	void TriggerAction() {
@@ -171,8 +194,7 @@ public class Gun : MonoBehaviour {
 		if (!_actionInQueue) {
 			foreach (var keySequence in _keySequences) {
 		        if (keySequence.Check(_keys)) {
-	        		_barrel.Play("fire");
-        			_cauldron.Play("idle");
+        			Invoke("CloseCauldron", 0.4f);
 
 		        	_actionInQueue = true;
 		        	_currentDelay = 0;
