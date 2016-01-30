@@ -32,35 +32,7 @@ public class Gun : MonoBehaviour {
 		_cauldron = GameObject.Find("Cauldron").GetComponent<Animator>();
 
 		_keys = new List<KeyType>();
-
-<<<<<<< HEAD
-		_keySequences = new List<KeySequence>
-		{
-			new KeySequence
-			(
-				"Action 1", new KeyType[] { KeyType.A, KeyType.B, KeyType.Trigger } // action 1
-			),
-			new KeySequence
-			(
-				"Action 2", new KeyType[] { KeyType.A, KeyType.B, KeyType.C, KeyType.Trigger } // action 2
-			),
-			new KeySequence
-			(
-				"Action 3", new KeyType[] { KeyType.A, KeyType.B, KeyType.C, KeyType.D, KeyType.Trigger } // action 3
-			),
-			new KeySequence
-			(
-				"Action 3", new KeyType[] { KeyType.A, KeyType.A, KeyType.A, KeyType.Trigger } // action 4
-			)
-		};
-
-		GameData.Instance.score = 0;
-		initializeEnemyList();
-		summon(UnityEngine.Random.Range(1, 5));
-
-=======
 		_keySequences = Preferences.Instance.RecipeList;
->>>>>>> 213a54b29a3071b542d2c4d55798b2ca1ff79c57
 	}
 	
 	void SpawnIngredient(KeyType key) {
