@@ -11,12 +11,20 @@ public class Gun : MonoBehaviour {
 	bool _actionInQueue;
 	string _actionName;
 	float _currentDelay;
-	float _delayActionBy = 0.5f;
+	float _delayActionBy = 0.4f;
+
+	bool _lidOpen;
+
+	Animator _barrel;
+	Animator _cauldron;
 
 	IList<KeyType> _keys;
 	IList<KeySequence> _keySequences;
 
 	void Start () {
+		_barrel = transform.Find("Barrel").GetComponent<Animator>();
+		_cauldron = GameObject.Find("Cauldron").GetComponent<Animator>();
+
 		_keys = new List<KeyType>();
 
 		_keySequences = new List<KeySequence>
@@ -117,6 +125,7 @@ public class Gun : MonoBehaviour {
         var doAnimateIngredient = false;
 		foreach (var keySequence in _keySequences) {
 	        if (keySequence.CheckSoFar(_keys)) {
+        		_cauldron.Play("open");
 	        	doAnimateIngredient = true;
 	        	break;
 	        }
@@ -131,6 +140,7 @@ public class Gun : MonoBehaviour {
 		if (_actionInQueue) {
 	        _currentDelay += Time.deltaTime;
 	        if (_currentDelay > _delayActionBy) {
+
 	        	switch (_actionName) {
 	        		case "Action 1":
 		    			var bullet = (GameObject)Resources.Load("BlueBullet");
@@ -161,6 +171,8 @@ public class Gun : MonoBehaviour {
 		if (!_actionInQueue) {
 			foreach (var keySequence in _keySequences) {
 		        if (keySequence.Check(_keys)) {
+	        		_barrel.Play("fire");
+        			_cauldron.Play("idle");
 
 		        	_actionInQueue = true;
 		        	_currentDelay = 0;

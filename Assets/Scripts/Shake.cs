@@ -22,9 +22,9 @@ public class Shake : MonoBehaviour {
 		_startingXPos = transform.position.x;
 		_startingYPos = transform.position.y;
 		_left = _startingXPos - _maxDistance;
-		_top = _startingYPos + _maxDistance;
 		_right = _startingXPos + _maxDistance;
 		_down = _startingYPos - _maxDistance;
+		_top = _startingYPos + _maxDistance;
 	}
 	
 	void Update () {
