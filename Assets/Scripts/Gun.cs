@@ -324,10 +324,10 @@ public class Gun : MonoBehaviour {
 	}
 
 	public void initializeEnemyList() {
-		_enemyStatsList.Add(new EnemyStats(10));
-		_enemyStatsList.Add(new EnemyStats(20));
-		_enemyStatsList.Add(new EnemyStats(15));
-		_enemyStatsList.Add(new EnemyStats(10));
-		_enemyStatsList.Add(new EnemyStats(50));
+		_enemyStatsList.Add(new EnemyStats(10, Element.Plant));
+		_enemyStatsList.Add(new EnemyStats(20, Element.Mineral));
+		_enemyStatsList.Add(new EnemyStats(15, Element.Fluid));
+		_enemyStatsList.Add(new EnemyStats(10, Element.Bone));
+		_enemyStatsList.Add(new EnemyStats(50, Element.Unknown));
 	}
 }
