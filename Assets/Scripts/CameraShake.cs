@@ -8,7 +8,7 @@ public class CameraShake : MonoBehaviour
 	public Transform camTransform;
 	
 	// How long the object should shake for.
-	public float shake = 0f;
+	
 	
 	// Amplitude of the shake. A larger value shakes the camera harder.
 	public float shakeAmount = 0.7f;
@@ -31,15 +31,15 @@ public class CameraShake : MonoBehaviour
 
 	void Update()
 	{
-		if (shake > 0)
+		if (PlayerHealth.Instance.shake > 0)
 		{
 			camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
 			
-			shake -= Time.deltaTime * decreaseFactor;
+			PlayerHealth.Instance.shake -= Time.deltaTime * decreaseFactor;
 		}
 		else
 		{
-			shake = 0f;
+			PlayerHealth.Instance.shake = 0f;
 			camTransform.localPosition = originalPos;
 		}
 	}

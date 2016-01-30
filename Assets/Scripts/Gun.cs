@@ -46,6 +46,9 @@ public class Gun : MonoBehaviour {
 		_keySequences = Preferences.Instance.RecipeList;
 
 		LoadPrefabs();
+
+		initializeEnemyList();
+		RandomlySummon();
 	}
 	
 	void LoadPrefabs() {
@@ -282,6 +285,10 @@ public class Gun : MonoBehaviour {
 		}
 	}
 
+	public void RandomlySummon() {
+		summon(UnityEngine.Random.Range(1, 5));
+	}
+	
 	public void summon(int enemyNum) {
 		var enemyName = string.Empty;
 

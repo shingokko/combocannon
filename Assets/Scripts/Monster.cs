@@ -95,6 +95,7 @@ public class Monster : MonoBehaviour {
 			}else{
 				PlayerHealth.Instance.currentHealth -= attackStats;
 			}
+			PlayerHealth.Instance.shake = 1f;
 
 			
 		}else if(counter == 100 && attack){
