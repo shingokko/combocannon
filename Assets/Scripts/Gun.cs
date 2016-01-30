@@ -30,18 +30,24 @@ public class Gun : MonoBehaviour {
 	GameObject plantBullet;
 	GameObject mineralBullet;
 	GameObject fluidBullet;
+	GameObject boneMachineGun;
+	GameObject plantMachineGun;
+	GameObject mineralMachineGun;
+	GameObject fluidMachineGun;
 	GameObject blueBullet;
 	GameObject flames;
 	
-	//Enemies
-	GameObject enemy = null;
+	// Enemies
 	public int respawnTime = 300;
-	private int counter;
-	List<EnemyStats> enemyStatsList = new List<EnemyStats>();
+	GameObject _enemy = null;
+	int _counter;
+	IList<EnemyStats> _enemyStatsList;
 
 	void Start () {
 		_barrel = transform.Find("Barrel").GetComponent<Animator>();
 		_cauldron = GameObject.Find("Cauldron").GetComponent<Animator>();
+
+		_enemyStatsList = new List<EnemyStats>();
 		_keys = new List<KeyType>();
 		_keySequences = Preferences.Instance.RecipeList;
 
@@ -60,7 +66,11 @@ public class Gun : MonoBehaviour {
 		boneBullet = (GameObject)Resources.Load("BoneBullet");
 		plantBullet = (GameObject)Resources.Load("PlantBullet");
 		mineralBullet = (GameObject)Resources.Load("MineralBullet");
-		fluidBullet = (GameObject)Resources.Load("FluidBullet");
+		fluidBullet = (GameObject)Resources.Load("BlueBullet");
+		boneMachineGun = (GameObject)Resources.Load("BoneMachineGun");
+		plantMachineGun = (GameObject)Resources.Load("PlantMachineGun");
+		mineralMachineGun = (GameObject)Resources.Load("MineralMachineGun");
+		fluidMachineGun = (GameObject)Resources.Load("FluidMachineGun");
 		blueBullet = (GameObject)Resources.Load("BlueBullet");
 		flames = (GameObject)Resources.Load("Flames");
 	}
@@ -194,48 +204,35 @@ public class Gun : MonoBehaviour {
 	        	switch (_actionName) {
 	        		case "Bone Bullet":
 		    			Instantiate(boneBullet);
-
-		    			if (EnemyHealth.Instance.currentHealth >= 0) {
-		    				EnemyHealth.Instance.currentHealth -= 1;
-		    			}
-						else {
-		    				EnemyHealth.Instance.currentHealth = 0;
-		    			}
-		    			
-
+	    				ReduceEnemyHealth(2);
 	        			break;
         			case "Plant Bullet":
 		    			Instantiate(plantBullet);
-
-		    			if (EnemyHealth.Instance.currentHealth >= 0) {
-		    				EnemyHealth.Instance.currentHealth -= 2;
-		    			}
-						else {
-		    				EnemyHealth.Instance.currentHealth = 0;
-		    			}
-
+	    				ReduceEnemyHealth(2);
         				break;
-    				case "Fluid Bullet":
-		    			Instantiate(fluidBullet);
-
-		    			if (EnemyHealth.Instance.currentHealth >= 0) {
-		    				EnemyHealth.Instance.currentHealth -= 3;
-		    			}
-						else {
-		    				EnemyHealth.Instance.currentHealth = 0;
-		    			}
-
-    					break;
     				case "Mineral Bullet":
 		    			Instantiate(mineralBullet);
-
-		    			if (EnemyHealth.Instance.currentHealth >= 0) {
-		    				EnemyHealth.Instance.currentHealth -= 4;
-		    			}
-						else {
-		    				EnemyHealth.Instance.currentHealth = 0;
-		    			}
-
+	    				ReduceEnemyHealth(2);
+    					break;
+    				case "Fluid Bullet":
+		    			Instantiate(fluidBullet);
+	    				ReduceEnemyHealth(2);
+    					break;
+    				case "Bone Machine Gun":
+		    			Instantiate(boneMachineGun);
+	    				ReduceEnemyHealth(4);
+    					break;
+    				case "Plant Machine Gun":
+		    			Instantiate(plantMachineGun);
+	    				ReduceEnemyHealth(4);
+    					break;
+    				case "Mineral Machine Gun":
+		    			Instantiate(mineralMachineGun);
+	    				ReduceEnemyHealth(4);
+    					break;
+    				case "Fluid Machine Gun":
+		    			Instantiate(fluidMachineGun);
+	    				ReduceEnemyHealth(4);
     					break;
 					default:
 						break;
@@ -245,6 +242,15 @@ public class Gun : MonoBehaviour {
 				_currentDelay = 0;
 				_actionName = string.Empty;
 	        }
+		}
+	}
+
+	void ReduceEnemyHealth(int reduceBy) {
+		if (EnemyHealth.Instance.currentHealth >= 0) {
+			EnemyHealth.Instance.currentHealth -= reduceBy;
+		}
+		else {
+			EnemyHealth.Instance.currentHealth = 0;
 		}
 	}
 
@@ -270,9 +276,9 @@ public class Gun : MonoBehaviour {
 
 		//Respawn
 		if (EnemyHealth.Instance.currentHealth <= 0) {
-			counter += 1;
+			_counter += 1;
 
-			if (counter == respawnTime) {
+			if (_counter == respawnTime) {
 				if (GameData.Instance.score % 1000 == 0) {
 					summon(5);
 				}
@@ -280,7 +286,7 @@ public class Gun : MonoBehaviour {
 					summon(UnityEngine.Random.Range(1, 5));
 				}
 				
-				counter = 0;
+				_counter = 0;
 			}
 		}
 	}
@@ -288,7 +294,7 @@ public class Gun : MonoBehaviour {
 	public void RandomlySummon() {
 		summon(UnityEngine.Random.Range(1, 5));
 	}
-	
+
 	public void summon(int enemyNum) {
 		var enemyName = string.Empty;
 
@@ -310,19 +316,18 @@ public class Gun : MonoBehaviour {
 				break;	
 		}
 
+		EnemyHealth.Instance.maxHealth = _enemyStatsList[enemyNum - 1].getHealth();
+		EnemyHealth.Instance.currentHealth = _enemyStatsList[enemyNum - 1].getHealth();
 
-		EnemyHealth.Instance.maxHealth = enemyStatsList[enemyNum - 1].getHealth();
-		EnemyHealth.Instance.currentHealth = enemyStatsList[enemyNum - 1].getHealth();
-
-		enemy = (GameObject)Resources.Load(enemyName);
-		Instantiate(enemy, new Vector3(-0.4325213f, 0.0f, 0), Quaternion.identity);
+		_enemy = (GameObject)Resources.Load(enemyName);
+		Instantiate(_enemy, new Vector3(-0.4325213f, 0.0f, 0), Quaternion.identity);
 	}
 
 	public void initializeEnemyList() {
-		enemyStatsList.Add(new EnemyStats(10));
-		enemyStatsList.Add(new EnemyStats(20));
-		enemyStatsList.Add(new EnemyStats(15));
-		enemyStatsList.Add(new EnemyStats(10));
-		enemyStatsList.Add(new EnemyStats(50));
+		_enemyStatsList.Add(new EnemyStats(10));
+		_enemyStatsList.Add(new EnemyStats(20));
+		_enemyStatsList.Add(new EnemyStats(15));
+		_enemyStatsList.Add(new EnemyStats(10));
+		_enemyStatsList.Add(new EnemyStats(50));
 	}
 }
