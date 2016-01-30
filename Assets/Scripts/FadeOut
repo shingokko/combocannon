@@ -1,0 +1,14 @@
+using UnityEngine;
+using System.Collections;
+
+public class FadeOut : MonoBehaviour {
+	public float speed = 10.0f;
+	public float holdTime = 10.0f;
+	private TextMesh toFadeMesh = GetComponent<TextMesh>();
+
+	void Update() {
+		toFadeMesh.text = Color.Lerp(toFadeMesh.text.color, Color.clear, speed * Time.deltaTime);
+	}
+
+
+}
