@@ -23,7 +23,7 @@ public class Gun : MonoBehaviour {
 
 	void Start () {
 		_barrel = transform.Find("Barrel").GetComponent<Animator>();
-		_cauldron = GameObject.Find("Cauldron").GetComponent<Animator>();
+		_cauldron = transform.Find("Cauldron").GetComponent<Animator>();
 
 		_keys = new List<KeyType>();
 
@@ -128,6 +128,8 @@ public class Gun : MonoBehaviour {
 
 		if (_trackingKeys) {
 	        _currentTime += Time.deltaTime;
+
+	        // gone over the allowed time to complete a key sequence
 	        if (_currentTime > _allowedTime) {
 	        	if (keySequenceIsValidSoFar) {
 	    			var smoke = (GameObject)Resources.Load("Smoke");
@@ -139,20 +141,22 @@ public class Gun : MonoBehaviour {
 
         		SetIdle();
 	        }
-		}
-
-		if (keySequenceIsValidSoFar) {
-			OpenCauldron();
-        	SpawnIngredient(keyPressed);
+	        else {
+	        	// there's still time, and the key sequence is valid so far
+				if (keySequenceIsValidSoFar) {
+					OpenCauldron();
+		        	SpawnIngredient(keyPressed);
+				}
+	        }
 		}
 	}
 
 	void SetIdle() {
 		_barrel.Play("idle");
-		_barrel.speed = 0;
+		_barrel.speed = 1;
 
 		_cauldron.Play("idle");
-		_cauldron.speed = 0;
+		_cauldron.speed = 1;
 	}
 
 	void OpenCauldron() {
