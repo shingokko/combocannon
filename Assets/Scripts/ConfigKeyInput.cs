@@ -28,7 +28,7 @@ public class ConfigKeyInput : Listable {
  
 	void OnGUI() {
         Event e = Event.current;
-        if (e.isKey && selected && !e.keyCode.ToString().Equals("None") && e.keyCode != KeyCode.UpArrow && e.keyCode != KeyCode.DownArrow) {
+        if (e.type == EventType.KeyUp && selected && isLegal(e.keyCode)) {
         	//Conditional of Doom:
         	//	The event must be a key event
         	// The field must also be selected
@@ -44,6 +44,13 @@ public class ConfigKeyInput : Listable {
 	void UpdateBinding(KeyCode key) {
 		Preferences.Instance.setKeyCode(keyMap, key);
 		GetComponent<TextMesh>().text = key.ToString();
+	}
+	
+	bool isLegal(KeyCode key) {
+		if (key > KeyCode.None && key < KeyCode.Numlock && key != KeyCode.UpArrow && key != KeyCode.DownArrow) {
+			return true;
+		}
+		return false;
 	}
 
 }
