@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class Config : Listable {
+public class Quit : Listable {
 
 	public bool selected = false;
 
@@ -24,7 +24,7 @@ public class Config : Listable {
 
 	void Update() {
 		if (selected && Input.GetKeyDown(KeyCode.Return)) {
-			SceneManager.LoadScene("Config");
+			Application.Quit();
 		}
 	}
 

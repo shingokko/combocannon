@@ -22,6 +22,12 @@ public class NewGame : Listable {
 		return selected;
 	}
 
+	void Update() {
+		if (selected && Input.GetKeyDown(KeyCode.Return)) {
+			SceneManager.LoadScene("Game");
+		}
+	}
+
 
 	void OnMouseDown() {
 		transform.localScale *= 0.9f;

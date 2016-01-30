@@ -27,25 +27,7 @@ public class Gun : MonoBehaviour {
 
 		_keys = new List<KeyType>();
 
-		_keySequences = new List<KeySequence>
-		{
-			new KeySequence
-			(
-				"Action 1", new KeyType[] { KeyType.A, KeyType.B, KeyType.Trigger } // action 1
-			),
-			new KeySequence
-			(
-				"Action 2", new KeyType[] { KeyType.A, KeyType.B, KeyType.C, KeyType.Trigger } // action 2
-			),
-			new KeySequence
-			(
-				"Action 3", new KeyType[] { KeyType.A, KeyType.B, KeyType.C, KeyType.D, KeyType.Trigger } // action 3
-			),
-			new KeySequence
-			(
-				"Action 3", new KeyType[] { KeyType.A, KeyType.A, KeyType.A, KeyType.Trigger } // action 4
-			)
-		};
+		_keySequences = Preferences.Instance.RecipeList;
 	}
 	
 	void SpawnIngredient(KeyType key) {
