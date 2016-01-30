@@ -42,6 +42,7 @@ public class Gun : MonoBehaviour {
 	GameObject _enemy = null;
 	int _counter;
 	IList<EnemyStats> _enemyStatsList;
+	EnemyStats _currentEnemyStats;
 
 	void Start () {
 		_barrel = transform.Find("Barrel").GetComponent<Animator>();
@@ -104,6 +105,9 @@ public class Gun : MonoBehaviour {
 	void TrackKeys() {
 		var currentKeyCount = _keys.Count;
 		var keyPressed = KeyType.Unknown;
+		if (EnemyHealth.Instance.currentHealth <= 0) {
+			return;
+		}
 
         if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.A))) {
         	_keys.Add(KeyType.A);
@@ -246,11 +250,11 @@ public class Gun : MonoBehaviour {
 	}
 
 	void ReduceEnemyHealth(int reduceBy) {
-		if (EnemyHealth.Instance.currentHealth >= 0) {
-			EnemyHealth.Instance.currentHealth -= reduceBy;
+		if (EnemyHealth.Instance.currentHealth - reduceBy <= 0) {
+			EnemyHealth.Instance.currentHealth = 0;
 		}
 		else {
-			EnemyHealth.Instance.currentHealth = 0;
+			EnemyHealth.Instance.currentHealth -= reduceBy;
 		}
 	}
 
@@ -316,8 +320,9 @@ public class Gun : MonoBehaviour {
 				break;	
 		}
 
-		EnemyHealth.Instance.maxHealth = _enemyStatsList[enemyNum - 1].getHealth();
-		EnemyHealth.Instance.currentHealth = _enemyStatsList[enemyNum - 1].getHealth();
+		_currentEnemyStats = _enemyStatsList[enemyNum - 1];
+		EnemyHealth.Instance.maxHealth = _currentEnemyStats.getHealth();
+		EnemyHealth.Instance.currentHealth = _currentEnemyStats.getHealth();
 
 		_enemy = (GameObject)Resources.Load(enemyName);
 		Instantiate(_enemy, new Vector3(-0.4325213f, 0.0f, 0), Quaternion.identity);
