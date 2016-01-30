@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class Preferences : Singleton<Preferences> {
 
 	public KeyCode UserInputA = KeyCode.A;
@@ -8,8 +8,30 @@ public class Preferences : Singleton<Preferences> {
 	public KeyCode UserInputC = KeyCode.D;
 	public KeyCode UserInputD = KeyCode.F;
 	public KeyCode UserInputTrigger = KeyCode.Space;
+	public IList<KeySequence> RecipeList;
 
-	protected Preferences(){}
+	protected Preferences() {
+		RecipeList = new List<KeySequence>
+		{
+			new KeySequence
+			(
+				"Action 1", new KeyType[] { KeyType.A, KeyType.B, KeyType.Trigger } // action 1
+			),
+			new KeySequence
+			(
+				"Action 2", new KeyType[] { KeyType.A, KeyType.B, KeyType.C, KeyType.Trigger } // action 2
+			),
+			new KeySequence
+			(
+				"Action 3", new KeyType[] { KeyType.A, KeyType.B, KeyType.C, KeyType.D, KeyType.Trigger } // action 3
+			),
+			new KeySequence
+			(
+				"Action 3", new KeyType[] { KeyType.A, KeyType.A, KeyType.A, KeyType.Trigger } // action 4
+			)
+		};
+
+	}
 
 	public KeyCode getKeyCode(KeyType forInput) {
 		switch(forInput) {
