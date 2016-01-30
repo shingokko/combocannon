@@ -24,22 +24,21 @@ public class Gun : MonoBehaviour {
 	GameObject boneIngredient1;
 	GameObject boneIngredient2;
 	GameObject boneIngredient3;
-
 	GameObject plantIngredient1;
 	GameObject plantIngredient2;
 	GameObject plantIngredient3;
-
 	GameObject mineralIngredient1;
 	GameObject mineralIngredient2;
 	GameObject mineralIngredient3;
-
 	GameObject fluidIngredient1;
 	GameObject fluidIngredient2;
 	GameObject fluidIngredient3;
 
-	GameObject smoke;
+	// particles
+	GameObject boneParticles;
 
 	// actions
+	GameObject smoke;
 	GameObject boneBullet;
 	GameObject plantBullet;
 	GameObject mineralBullet;
@@ -89,6 +88,9 @@ public class Gun : MonoBehaviour {
 		fluidIngredient1 = (GameObject)Resources.Load("IngredientD_1");
 		fluidIngredient2 = (GameObject)Resources.Load("IngredientD_2");
 		fluidIngredient3 = (GameObject)Resources.Load("IngredientD_3");
+
+		// particles
+		boneParticles = (GameObject)Resources.Load("BoneParticles");
 
 		// actions
 		smoke = (GameObject)Resources.Load("Smoke");
@@ -281,6 +283,7 @@ public class Gun : MonoBehaviour {
 	        	switch (_actionName) {
 	        		case "Bone Bullet":
 		    			Instantiate(boneBullet);
+		    			Instantiate(boneParticles);
 	    				ReduceEnemyHealth(2);
 	        			break;
         			case "Plant Bullet":
