@@ -40,6 +40,10 @@ public class Gun : MonoBehaviour {
 			new KeySequence
 			(
 				"Action 3", new KeyType[] { KeyType.A, KeyType.B, KeyType.C, KeyType.D, KeyType.Trigger } // action 3
+			),
+			new KeySequence
+			(
+				"Action 3", new KeyType[] { KeyType.A, KeyType.A, KeyType.A, KeyType.Trigger } // action 4
 			)
 		};
 	}
@@ -74,27 +78,27 @@ public class Gun : MonoBehaviour {
 		var currentKeyCount = _keys.Count;
 		var keyPressed = KeyType.Unknown;
 
-        if (Input.GetKeyDown("a")) {
+        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.A))) {
         	_keys.Add(KeyType.A);
         	keyPressed = KeyType.A;
         }
 
-        if (Input.GetKeyDown("s")) {
+        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.B))) {
         	_keys.Add(KeyType.B);
         	keyPressed = KeyType.B;
         }
 
-        if (Input.GetKeyDown("d")) {
+        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.C))) {
         	_keys.Add(KeyType.C);
         	keyPressed = KeyType.C;
         }
 
-        if (Input.GetKeyDown("f")) {
+        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.D))) {
         	_keys.Add(KeyType.D);
         	keyPressed = KeyType.D;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.Trigger))) {
         	_keys.Add(KeyType.Trigger);
         	keyPressed = KeyType.Trigger;
         }
