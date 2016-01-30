@@ -17,6 +17,10 @@ public class MachineGun : MonoBehaviour {
 		_currentTime = 0;
 		_origin = GameObject.Find("GunTip");
 		_destination = GameObject.Find("EnemyHead");
+		
+		if (_destination == null) {
+			_dead = true;
+		}
 	}
 
 	void Update () {

@@ -11,7 +11,9 @@ public class Explosion : MonoBehaviour {
 		_target = GameObject.Find("EnemyHead");
 		transform.position = _target.transform.position;
 
-
+		if (_target == null) {
+			Destroy(gameObject, 0.1f);
+		}
 	}
 
 	void Update () {

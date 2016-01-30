@@ -13,6 +13,11 @@ public class Bullet : MonoBehaviour {
 		_destination = GameObject.Find("EnemyHead");
 		_dead = false;
 		transform.position = _origin.transform.position;
+
+		if (_destination == null) {
+			_dead = true;
+			Destroy(gameObject, 0.1f);
+		}
 	}
 
 	bool V3Equal(Vector3 a, Vector3 b) {
@@ -26,7 +31,7 @@ public class Bullet : MonoBehaviour {
         transform.position = Vector3.MoveTowards(transform.position, _destination.transform.position, step);
         if (V3Equal(transform.position, _destination.transform.position)) {
 			_dead = true;
-			
+
         	Destroy(gameObject, 0.1f);
         }
 	}

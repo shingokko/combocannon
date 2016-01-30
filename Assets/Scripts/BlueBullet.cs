@@ -11,6 +11,11 @@ public class BlueBullet : MonoBehaviour {
 	void Start () {
 		_origin = GameObject.Find("GunTip");
 		_destination = GameObject.Find("EnemyHead");
+
+		if (_destination == null) {
+			Destroy(gameObject, 0.1f);
+		}
+
 		_dead = false;
 		transform.position = _origin.transform.position;
 	}

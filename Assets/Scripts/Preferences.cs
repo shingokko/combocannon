@@ -52,6 +52,26 @@ public class Preferences : Singleton<Preferences> {
 			(
 				"Mineral Machine Gun", new KeyType[] { KeyType.C, KeyType.C, KeyType.C, KeyType.Trigger }, Element.Bone, Element.Bone
 			),
+
+			new KeySequence
+			(
+				"Bone Fire", new KeyType[] { KeyType.B, KeyType.B, KeyType.B, KeyType.B, KeyType.Trigger }, Element.Bone, Element.Bone
+			),
+
+			new KeySequence
+			(
+				"Plant Fire", new KeyType[] { KeyType.A, KeyType.A, KeyType.A, KeyType.A, KeyType.Trigger }, Element.Bone, Element.Bone
+			),
+
+			new KeySequence
+			(
+				"Fluid Fire", new KeyType[] { KeyType.D, KeyType.D, KeyType.D, KeyType.D, KeyType.Trigger }, Element.Bone, Element.Bone
+			),
+
+			new KeySequence
+			(
+				"Mineral Fire", new KeyType[] { KeyType.C, KeyType.C, KeyType.C, KeyType.C, KeyType.Trigger }, Element.Bone, Element.Bone
+			)
 		};
 
 	}

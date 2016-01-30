@@ -21,11 +21,25 @@ public class Gun : MonoBehaviour {
 	IList<KeyType> _keys;
 	IList<KeySequence> _keySequences;
 
-	GameObject ingredientA;
-	GameObject ingredientB;
-	GameObject ingredientC;
-	GameObject ingredientD;
+	GameObject boneIngredient1;
+	GameObject boneIngredient2;
+	GameObject boneIngredient3;
+
+	GameObject plantIngredient1;
+	GameObject plantIngredient2;
+	GameObject plantIngredient3;
+
+	GameObject mineralIngredient1;
+	GameObject mineralIngredient2;
+	GameObject mineralIngredient3;
+
+	GameObject fluidIngredient1;
+	GameObject fluidIngredient2;
+	GameObject fluidIngredient3;
+
 	GameObject smoke;
+
+	// actions
 	GameObject boneBullet;
 	GameObject plantBullet;
 	GameObject mineralBullet;
@@ -34,6 +48,9 @@ public class Gun : MonoBehaviour {
 	GameObject plantMachineGun;
 	GameObject mineralMachineGun;
 	GameObject fluidMachineGun;
+	GameObject boneFire;
+
+	// extra actions
 	GameObject blueBullet;
 	GameObject flames;
 	
@@ -59,19 +76,33 @@ public class Gun : MonoBehaviour {
 	}
 	
 	void LoadPrefabs() {
-		ingredientA = (GameObject)Resources.Load("IngredientA");
-		ingredientB = (GameObject)Resources.Load("IngredientB");
-		ingredientC = (GameObject)Resources.Load("IngredientC");
-		ingredientD = (GameObject)Resources.Load("IngredientD");
+		// ingredients
+		plantIngredient1 = (GameObject)Resources.Load("IngredientA_1");
+		plantIngredient2 = (GameObject)Resources.Load("IngredientA_2");
+		plantIngredient3 = (GameObject)Resources.Load("IngredientA_3");
+		boneIngredient1 = (GameObject)Resources.Load("IngredientB_1");
+		boneIngredient2 = (GameObject)Resources.Load("IngredientB_2");
+		boneIngredient3 = (GameObject)Resources.Load("IngredientB_3");
+		mineralIngredient1 = (GameObject)Resources.Load("IngredientC_1");
+		mineralIngredient2 = (GameObject)Resources.Load("IngredientC_2");
+		mineralIngredient3 = (GameObject)Resources.Load("IngredientC_3");
+		fluidIngredient1 = (GameObject)Resources.Load("IngredientD_1");
+		fluidIngredient2 = (GameObject)Resources.Load("IngredientD_2");
+		fluidIngredient3 = (GameObject)Resources.Load("IngredientD_3");
+
+		// actions
 		smoke = (GameObject)Resources.Load("Smoke");
 		boneBullet = (GameObject)Resources.Load("BoneBullet");
 		plantBullet = (GameObject)Resources.Load("PlantBullet");
 		mineralBullet = (GameObject)Resources.Load("MineralBullet");
-		fluidBullet = (GameObject)Resources.Load("BlueBullet");
+		fluidBullet = (GameObject)Resources.Load("FluidBullet");
 		boneMachineGun = (GameObject)Resources.Load("BoneMachineGun");
 		plantMachineGun = (GameObject)Resources.Load("PlantMachineGun");
 		mineralMachineGun = (GameObject)Resources.Load("MineralMachineGun");
 		fluidMachineGun = (GameObject)Resources.Load("FluidMachineGun");
+		boneFire = (GameObject)Resources.Load("BlueBullet");
+
+		// extra actions
 		blueBullet = (GameObject)Resources.Load("BlueBullet");
 		flames = (GameObject)Resources.Load("Flames");
 	}
@@ -79,22 +110,64 @@ public class Gun : MonoBehaviour {
 	void SpawnIngredient(KeyType key) {
         if (key == KeyType.Unknown && key == KeyType.Trigger) { return; }
 
+		var ingredientVersion = UnityEngine.Random.Range(1, 3);
+
         GameObject ingredient = null;
 
     	if (key == KeyType.A) {
-    		ingredient = ingredientA;
+    		switch (ingredientVersion) {
+    			case 1:
+    				ingredient = plantIngredient1;
+    				break;
+				case 2:
+    				ingredient = plantIngredient2;
+					break;
+				default:
+    				ingredient = plantIngredient3;
+					break;
+    		}
     	}
 
     	if (key == KeyType.B) {
-    		ingredient = ingredientB;
+    		switch (ingredientVersion) {
+    			case 1:
+    				ingredient = boneIngredient1;
+    				break;
+				case 2:
+    				ingredient = boneIngredient2;
+					break;
+				default:
+    				ingredient = boneIngredient3;
+					break;
+    		}
     	}
 
     	if (key == KeyType.C) {
-    		ingredient = ingredientC;
+    		switch (ingredientVersion) {
+    			case 1:
+    				ingredient = mineralIngredient1;
+    				break;
+				case 2:
+    				ingredient = mineralIngredient2;
+					break;
+				default:
+    				ingredient = mineralIngredient3;
+					break;
+    		}
     	}
 
     	if (key == KeyType.D) {
-    		ingredient = ingredientD;
+    		switch (ingredientVersion) {
+    			case 1:
+    				ingredient = fluidIngredient1;
+    				break;
+				case 2:
+    				ingredient = fluidIngredient2;
+					break;
+				default:
+    				ingredient = fluidIngredient3;
+					break;
+    		}
     	}
 
     	if (ingredient != null) {
@@ -238,6 +311,10 @@ public class Gun : MonoBehaviour {
 		    			Instantiate(fluidMachineGun);
 	    				ReduceEnemyHealth(4);
     					break;
+					case "Bone Fire":
+						Instantiate(boneFire);
+						ReduceEnemyHealth(6);
+						break;
 					default:
 						break;
 	        	}
