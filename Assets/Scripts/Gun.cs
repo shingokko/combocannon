@@ -110,6 +110,7 @@ public class Gun : MonoBehaviour {
 
 		if (_trackingKeys) {
 	        _currentTime += Time.deltaTime;
+
 	        if (_currentTime > _allowedTime) {
 	        	if (keySequenceIsValidSoFar) {
 	    			var smoke = (GameObject)Resources.Load("Smoke");
@@ -121,11 +122,12 @@ public class Gun : MonoBehaviour {
 
         		SetIdle();
 	        }
-		}
-
-		if (keySequenceIsValidSoFar) {
-			OpenCauldron();
-        	SpawnIngredient(keyPressed);
+	        else {
+				if (keySequenceIsValidSoFar) {
+					OpenCauldron();
+		        	SpawnIngredient(keyPressed);
+				}
+	        }
 		}
 	}
 
