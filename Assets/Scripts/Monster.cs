@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Monster : MonoBehaviour {
@@ -27,6 +28,8 @@ public class Monster : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+			
 
 		//Die / defeated
 		if (EnemyHealth.Instance.currentHealth <= 0 && !defeated){
@@ -73,7 +76,8 @@ public class Monster : MonoBehaviour {
 
 
 		if(PlayerHealth.Instance.currentHealth == 0){
-			transform.localScale = new Vector3(0.852808f, 0.852808f,0.852808f);
+			transform.localScale = new Vector3(2f, 2f,2f);
+			transform.position = new Vector3(0, -5f, 0);
 			counter = 0;
 		}else{
 			if(!attack && !defeated && !stun){
@@ -83,19 +87,20 @@ public class Monster : MonoBehaviour {
 		}
 
 		//Attack
-		if(counter == attackSpeed - 100 && PlayerHealth.Instance.currentHealth != 0){
+		if(counter == attackSpeed - 100 && PlayerHealth.Instance.currentHealth != 0 && !attack){
 			attack = true;
 			counter = 0;
 		}
 		if(counter == 50 && attack){
 			transform.localScale = new Vector3(2f, 2f,2f);
 			transform.position = new Vector3(0, -5f, 0);
+			PlayerHealth.Instance.shake = 1f;
 			if(PlayerHealth.Instance.currentHealth - attackStats < 0){
 				PlayerHealth.Instance.currentHealth = 0;
 			}else{
 				PlayerHealth.Instance.currentHealth -= attackStats;
 			}
-			PlayerHealth.Instance.shake = 1f;
+			counter += 1;
 
 			
 		}else if(counter == 100 && attack){
@@ -103,6 +108,7 @@ public class Monster : MonoBehaviour {
 			counter = 0;
 			transform.localScale = new Vector3(0.852808f, 0.852808f,0.852808f);
 			transform.position = new Vector3(-0.4325213f, 0, 0);
+					
 		}
 
 		if(counter%150 == 0){
