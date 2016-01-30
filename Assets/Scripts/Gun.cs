@@ -40,20 +40,22 @@ public class Gun : MonoBehaviour {
 
         GameObject ingredient = null;
 
+        int IngredientVersion = UnityEngine.Random.Range(1, 3);
+
     	if (key == KeyType.A) {
-    		ingredient = (GameObject)Resources.Load("IngredientA");
+    		ingredient = (GameObject)Resources.Load("IngredientA_" + IngredientVersion);
     	}
 
     	if (key == KeyType.B) {
-    		ingredient = (GameObject)Resources.Load("IngredientB");
+    		ingredient = (GameObject)Resources.Load("IngredientB_" + IngredientVersion);
     	}
 
     	if (key == KeyType.C) {
-    		ingredient = (GameObject)Resources.Load("IngredientC");
+    		ingredient = (GameObject)Resources.Load("IngredientC_" + IngredientVersion);
     	}
 
     	if (key == KeyType.D) {
-    		ingredient = (GameObject)Resources.Load("IngredientD");
+    		ingredient = (GameObject)Resources.Load("IngredientD_" + IngredientVersion);
     	}
 
     	if (ingredient != null) {
