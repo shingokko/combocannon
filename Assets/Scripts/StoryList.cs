@@ -13,7 +13,7 @@ public class StoryList : MonoBehaviour {
 	}
 	
 	void Update() {
-		if (StoryArray[index].GetFinished()) {
+		if (index < StoryArray.Length && StoryArray[index].GetFinished()) {
 			NextStory();
 		}
 	}
@@ -21,11 +21,11 @@ public class StoryList : MonoBehaviour {
 	private void NextStory() {
 		Debug.Log("Next Story");
 
-		if (index < StoryArray.Length) {
+		if (index < (StoryArray.Length - 1)) {
 			index++;
 			StoryArray[index].StartStory();
 		} else {
-			SceneManager.LoadScene("Menu");
+			SceneManager.LoadScene("Tutorial");
 		}
 	}
 	

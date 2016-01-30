@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Gun : MonoBehaviour {
+	public bool Tutorial = false;
 	bool _trackingKeys;
 	float _currentTime;
 	float _allowedTime = 0.6f;
@@ -401,10 +402,19 @@ public class Gun : MonoBehaviour {
 		}
 
 		_currentEnemyStats = _enemyStatsList[enemyNum - 1];
+		if (Tutorial) {
+			_currentEnemyStats = new EnemyStats(1000, Element.Unknown);
+		}
 		EnemyHealth.Instance.maxHealth = _currentEnemyStats.getHealth();
 		EnemyHealth.Instance.currentHealth = _currentEnemyStats.getHealth();
-
+		if (Tutorial) {
+			enemyName = "TutorialMonster";
+		}
 		_enemy = (GameObject)Resources.Load(enemyName);
+		if (Tutorial) {
+			Instantiate(_enemy, new Vector3(-10.0f, 0.0f, 0), Quaternion.identity);
+			return;
+		}
 		Instantiate(_enemy, new Vector3(-0.4325213f, 0.0f, 0), Quaternion.identity);
 	}
 

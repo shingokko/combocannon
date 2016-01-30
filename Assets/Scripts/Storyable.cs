@@ -6,8 +6,8 @@ public abstract class Storyable : MonoBehaviour {
 	public virtual bool GetFinished() {
 		return false;
 	}
-	public virtual void StartStory() {
+	public virtual void StartStory() {}
 
-	}
+	public virtual void SetVisible() {}
 
 }
