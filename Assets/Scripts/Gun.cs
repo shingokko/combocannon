@@ -21,6 +21,12 @@ public class Gun : MonoBehaviour {
 	IList<KeyType> _keys;
 	IList<KeySequence> _keySequences;
 
+	//Enemies
+	GameObject enemy = null;
+	public int respawnTime = 300;
+	private int counter;
+	List<EnemyStats> enemyStatsList = new List<EnemyStats>();
+
 	void Start () {
 		_barrel = transform.Find("Barrel").GetComponent<Animator>();
 		_cauldron = transform.Find("Cauldron").GetComponent<Animator>();
@@ -46,6 +52,11 @@ public class Gun : MonoBehaviour {
 				"Action 3", new KeyType[] { KeyType.A, KeyType.A, KeyType.A, KeyType.Trigger } // action 4
 			)
 		};
+
+		GameData.Instance.score = 0;
+		initializeEnemyList();
+		summon(UnityEngine.Random.Range(1, 5));
+
 	}
 	
 	void SpawnIngredient(KeyType key) {
@@ -181,14 +192,38 @@ public class Gun : MonoBehaviour {
 	        		case "Action 1":
 		    			var bullet = (GameObject)Resources.Load("BlueBullet");
 		    			Instantiate(bullet);
+
+		    			if (EnemyHealth.Instance.currentHealth>=0) {
+		    				EnemyHealth.Instance.currentHealth -= 1;
+		    			}
+						else {
+		    				EnemyHealth.Instance.currentHealth = 0;
+		    			}
+		    			
+
 	        			break;
         			case "Action 2":
 		    			var flames = (GameObject)Resources.Load("Flames");
 		    			Instantiate(flames);
+
+		    			if (EnemyHealth.Instance.currentHealth>=0) {
+		    				EnemyHealth.Instance.currentHealth -= 2;
+		    			}
+						else {
+		    				EnemyHealth.Instance.currentHealth = 0;
+		    			}
+
         				break;
     				case "Action 3":
 		    			var bullet3 = (GameObject)Resources.Load("BlueBullet");
 		    			Instantiate(bullet3);
+
+		    			if (EnemyHealth.Instance.currentHealth>=0) {
+		    				EnemyHealth.Instance.currentHealth -= 3;
+		    			}
+						else {
+		    				EnemyHealth.Instance.currentHealth = 0;
+		    			}
     					break;
 					default:
 						break;
@@ -220,5 +255,58 @@ public class Gun : MonoBehaviour {
 		}
 
 		TriggerAction();
+
+		//Respawn
+		if(EnemyHealth.Instance.currentHealth <= 0){
+			counter += 1;
+
+			if(counter == respawnTime){
+				if(GameData.Instance.score % 1000 == 0){
+					summon(5);
+				}else{
+					summon(UnityEngine.Random.Range(1, 5));
+				}
+				
+				counter = 0;
+			}
+			
+		}
+	}
+
+	public void summon(int enemyNum){
+		String enemyName = "";
+
+		switch(enemyNum){
+			case 1:
+				enemyName = "Monster1";
+				break;
+			case 2:
+				enemyName = "Monster2";
+				break;
+			case 3:
+				enemyName = "Monster3";
+				break;
+			case 4:
+				enemyName = "Monster4";
+				break;
+			case 5:
+				enemyName = "Monster5";
+				break;
+		}
+
+
+		EnemyHealth.Instance.maxHealth = enemyStatsList[enemyNum - 1].getHealth();
+		EnemyHealth.Instance.currentHealth = enemyStatsList[enemyNum - 1].getHealth();
+
+		enemy = (GameObject)Resources.Load(enemyName);
+		Instantiate(enemy, new Vector3(-0.4325213f, 0.0f, 0), Quaternion.identity);
+	}
+
+	public void initializeEnemyList(){
+		enemyStatsList.Add(new EnemyStats(10));
+		enemyStatsList.Add(new EnemyStats(20));
+		enemyStatsList.Add(new EnemyStats(15));
+		enemyStatsList.Add(new EnemyStats(10));
+		enemyStatsList.Add(new EnemyStats(50));
 	}
 }

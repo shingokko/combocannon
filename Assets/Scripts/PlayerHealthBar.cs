@@ -14,7 +14,7 @@ public class PlayerHealthBar : MonoBehaviour {
 	void Update () {
 		textMesh.text = PlayerHealth.Instance.currentHealth + " / " + PlayerHealth.Instance.maxHealth;
 
-		if (PlayerHealth.Instance.currentHealth == 0){
+		if (PlayerHealth.Instance.currentHealth <= 0){
 			SceneManager.LoadScene("GameOver");
 		}
 	}
