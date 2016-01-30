@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -19,7 +19,6 @@ public class Menu : Listable {
 	}
 
 	public override void setSelect(bool select) {
-				Debug.Log("should be run");
 		if (select != selected) {
 			if (select) {
 				transform.localScale /= 0.9f;
