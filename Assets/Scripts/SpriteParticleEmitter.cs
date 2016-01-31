@@ -4,10 +4,10 @@ using System.Collections;
 public class SpriteParticleEmitter : MonoBehaviour {
 	bool _dead;
 	float _currentTime;
-	float _firingRate = 0.1f;
+	float _firingRate = 0.025f;
 
 	public GameObject prefab;
-	public int particleCount = 5;
+	public int particleCount = 6;
 
 	void Start() {
 		_dead = false;

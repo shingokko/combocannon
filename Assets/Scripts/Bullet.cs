@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Bullet : MonoBehaviour {
-	public float moveSpeed = 10;
+	public float moveSpeed = 30;
 
 	bool _dead;
 	GameObject _origin;

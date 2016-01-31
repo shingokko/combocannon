@@ -37,6 +37,9 @@ public class Gun : MonoBehaviour {
 
 	// particles
 	GameObject boneParticles;
+	GameObject plantParticles;
+	GameObject mineralParticles;
+	GameObject fluidParticles;
 
 	// actions
 	GameObject smoke;
@@ -92,7 +95,10 @@ public class Gun : MonoBehaviour {
 
 		// particles
 		boneParticles = (GameObject)Resources.Load("BoneParticles");
-
+		plantParticles = (GameObject)Resources.Load("PlantParticles");
+		mineralParticles = (GameObject)Resources.Load("MineralParticles");
+		fluidParticles = (GameObject)Resources.Load("FluidParticles");
+		
 		// actions
 		smoke = (GameObject)Resources.Load("Smoke");
 		boneBullet = (GameObject)Resources.Load("BoneBullet");
@@ -113,7 +119,8 @@ public class Gun : MonoBehaviour {
 	void SpawnIngredient(KeyType key) {
         if (key == KeyType.Unknown && key == KeyType.Trigger) { return; }
 
-		var ingredientVersion = UnityEngine.Random.Range(1, 3);
+		var ingredientVersion = UnityEngine.Random.Range(1, 4);
+		Debug.Log("" + ingredientVersion);
 
         GameObject ingredient = null;
 
@@ -284,39 +291,47 @@ public class Gun : MonoBehaviour {
 	        	switch (_actionName) {
 	        		case "Bone Bullet":
 		    			Instantiate(boneBullet);
-		    			Instantiate(boneParticles);
+		    			Instantiate(fluidParticles);
 	    				ReduceEnemyHealth(2);
 	        			break;
         			case "Plant Bullet":
 		    			Instantiate(plantBullet);
+		    			Instantiate(boneParticles);
 	    				ReduceEnemyHealth(2);
         				break;
     				case "Mineral Bullet":
 		    			Instantiate(mineralBullet);
+		    			Instantiate(plantParticles);
 	    				ReduceEnemyHealth(2);
     					break;
     				case "Fluid Bullet":
 		    			Instantiate(fluidBullet);
+		    			Instantiate(mineralParticles);
 	    				ReduceEnemyHealth(2);
     					break;
     				case "Bone Machine Gun":
 		    			Instantiate(boneMachineGun);
+		    			Instantiate(mineralParticles);
 	    				ReduceEnemyHealth(4);
     					break;
     				case "Plant Machine Gun":
 		    			Instantiate(plantMachineGun);
+		    			Instantiate(boneParticles);
 	    				ReduceEnemyHealth(4);
     					break;
     				case "Mineral Machine Gun":
 		    			Instantiate(mineralMachineGun);
+		    			Instantiate(fluidParticles);
 	    				ReduceEnemyHealth(4);
     					break;
     				case "Fluid Machine Gun":
 		    			Instantiate(fluidMachineGun);
+		    			Instantiate(boneParticles);
 	    				ReduceEnemyHealth(4);
     					break;
 					case "Bone Fire":
 						Instantiate(boneFire);
+		    			Instantiate(fluidParticles);
 						ReduceEnemyHealth(6);
 						break;
 					default:

@@ -34,8 +34,8 @@ public class MachineGun : MonoBehaviour {
 	        if (_currentTime > _firingRate) {
 	        	var currentPos = prefab.transform.position;
 
-	        	var offsetX = ((float)Random.Range(-50, 50)) * 0.05f;
-	        	var offsetY = ((float)Random.Range(-50, 50)) * 0.05f;
+		    	var offsetX = ((float)Random.Range(-100, 100)) * 0.01f;
+		    	var offsetY = ((float)Random.Range(-100, 100)) * 0.01f;
 	        	var offsetPos = new Vector3(currentPos.x + offsetX, currentPos.y + offsetY, currentPos.z);
 
         		prefab.transform.position = offsetPos;
