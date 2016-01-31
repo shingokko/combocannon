@@ -31,7 +31,7 @@ public class NewGame : Listable {
 
 	void OnMouseDown() {
 		transform.localScale *= 0.9f;
-		PlayerHealth.Instance.currentHealth = 10;
+		PlayerHealth.Instance.currentHealth = 20;
 		PlayerHealth.Instance.shake = 0;
 	}
 

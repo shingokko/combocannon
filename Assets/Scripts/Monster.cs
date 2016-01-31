@@ -100,6 +100,9 @@ public class Monster : MonoBehaviour {
 			}else{
 				PlayerHealth.Instance.currentHealth -= attackStats;
 			}
+
+			ElementEffect.Instance.playerDamage = "- " + attackStats;
+			ElementEffect.Instance.playerDamageChanged = true;
 			counter += 1;
 
 			
