@@ -7,7 +7,7 @@ public class Gun : MonoBehaviour {
 	public bool Tutorial = false;
 	bool _trackingKeys;
 	float _currentTime;
-	float _allowedTime = 0.6f;
+	float _allowedTime = 2.0f;
 
 	bool _actionInQueue;
 	string _actionName;
