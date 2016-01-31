@@ -36,8 +36,8 @@ public class SpriteParticle : MonoBehaviour {
 				_currentAngle = transform.rotation.z;
 			}
 
-	    	var offsetX = ((float)Random.Range(-100, 100)) * 0.01f;
-	    	var offsetY = ((float)Random.Range(-100, 100)) * 0.01f;
+	    	var offsetX = ((float)Random.Range(-150, 150)) * 0.01f;
+	    	var offsetY = ((float)Random.Range(-150, 150)) * 0.01f;
 
 			_dead = false;
 	    	transform.position = new Vector3
@@ -59,13 +59,28 @@ public class SpriteParticle : MonoBehaviour {
 		}
 	}
 
+ 	void EnsureDestination() {
+		if (_destination == null) {
+			_dead = true;
+
+			if (gameObject != null) {
+				Destroy(gameObject, 0.2f);
+			}
+		}
+ 	}
+
 	void Update () {
 		if (_dead) { return; }
+
+		EnsureDestination();
 
 		_currentTime += Time.deltaTime;
 		if (_currentTime > _life) {
 			_dead = true;
-        	Destroy(gameObject, 0.2f);
+
+			if (gameObject != null) {
+        		Destroy(gameObject, 0.2f);
+			}
 		}
 		else {
 	        var step = _speed * Time.deltaTime;

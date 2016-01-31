@@ -18,10 +18,15 @@ public class MachineGun : MonoBehaviour {
 		_origin = GameObject.Find("GunTip");
 		_destination = GameObject.Find("EnemyHead");
 		
+		EnsureDestination();
+	}
+
+ 	void EnsureDestination() {
 		if (_destination == null) {
 			_dead = true;
+			Destroy(gameObject, 0.2f);
 		}
-	}
+ 	}
 
 	void Update () {
 		if (_dead) {
@@ -29,6 +34,8 @@ public class MachineGun : MonoBehaviour {
 			return;
 		}
 
+		EnsureDestination();
+		
 		if (bulletCount > 0) {
 	        _currentTime += Time.deltaTime;
 	        if (_currentTime > _firingRate) {

@@ -30,7 +30,9 @@ public class Smoke : MonoBehaviour {
 	void Update () {
         _currentTime += Time.deltaTime;
         if (_currentTime > _waitTime) {
-        	Destroy(gameObject, 0.2f);
+			if (gameObject != null) {
+        		Destroy(gameObject, 0.2f);
+			}
         }
 	}
 }

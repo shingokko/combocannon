@@ -14,25 +14,36 @@ public class Bullet : MonoBehaviour {
 		_dead = false;
 		transform.position = _origin.transform.position;
 
-		if (_destination == null) {
-			_dead = true;
-			Destroy(gameObject, 0.1f);
-		}
+		EnsureDestination();
 	}
 
 	bool V3Equal(Vector3 a, Vector3 b) {
 		return Vector3.SqrMagnitude(a - b) < 0.0001;
  	}
 
+ 	void EnsureDestination() {
+		if (_destination == null) {
+			_dead = true;
+
+			if (gameObject != null) {
+				Destroy(gameObject, 0.1f);
+			}
+		}
+ 	}
+
 	void Update () {
 		if (_dead) { return; }
+
+		EnsureDestination();
 
         var step = moveSpeed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, _destination.transform.position, step);
         if (V3Equal(transform.position, _destination.transform.position)) {
 			_dead = true;
-
-        	Destroy(gameObject, 0.1f);
+			
+			if (gameObject != null) {
+				Destroy(gameObject, 0.1f);
+			}
         }
 	}
 }

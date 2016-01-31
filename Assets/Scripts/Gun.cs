@@ -291,7 +291,7 @@ public class Gun : MonoBehaviour {
 	        	switch (_actionName) {
 	        		case "Bone Bullet":
 		    			Instantiate(boneBullet);
-		    			Instantiate(plantParticles);
+		    			Instantiate(fluidParticles);
 	    				ReduceEnemyHealth( _currentEnemyStats.getDamage(Element.Bone, 2) );
 	        			break;
         			case "Plant Bullet":
@@ -301,7 +301,7 @@ public class Gun : MonoBehaviour {
         				break;
     				case "Mineral Bullet":
 		    			Instantiate(mineralBullet);
-		    			Instantiate(fluidParticles);
+		    			Instantiate(plantParticles);
 	    				ReduceEnemyHealth( _currentEnemyStats.getDamage(Element.Mineral, 2) );
     					break;
     				case "Fluid Bullet":
@@ -311,7 +311,7 @@ public class Gun : MonoBehaviour {
     					break;
     				case "Bone Machine Gun":
 		    			Instantiate(boneMachineGun);
-		    			Instantiate(plantParticles);
+		    			Instantiate(mineralParticles);
 	    				ReduceEnemyHealth( _currentEnemyStats.getDamage(Element.Bone, 4) );
     					break;
     				case "Plant Machine Gun":
@@ -321,34 +321,33 @@ public class Gun : MonoBehaviour {
     					break;
     				case "Mineral Machine Gun":
 		    			Instantiate(mineralMachineGun);
-		    			Instantiate(plantParticles);
+		    			Instantiate(fluidParticles);
 	    				ReduceEnemyHealth( _currentEnemyStats.getDamage(Element.Mineral, 4) );
     					break;
     				case "Fluid Machine Gun":
 		    			Instantiate(fluidMachineGun);
-		    			Instantiate(plantParticles);
+		    			Instantiate(boneParticles);
 	    				ReduceEnemyHealth( _currentEnemyStats.getDamage(Element.Fluid, 4) );
     					break;
 					case "Bone Fire":
 						Instantiate(boneFire);
-		    			Instantiate(boneParticles);
+		    			Instantiate(fluidCrazyParticles);
 						ReduceEnemyHealth( _currentEnemyStats.getDamage(Element.Bone, 6) );
 						break;
 					case "Plant Fire":
-						Instantiate(boneFire);
-		    			Instantiate(plantParticles);
+						Instantiate(plantFire);
+		    			Instantiate(mineralCrazyParticles);
 						ReduceEnemyHealth( _currentEnemyStats.getDamage(Element.Plant, 6) );
 						break;
 					case "Mineral Fire":
-						Instantiate(boneFire);
-		    			Instantiate(mineralParticles);
+						Instantiate(mineralFire);
+		    			Instantiate(boneCrazyParticles);
 						ReduceEnemyHealth( _currentEnemyStats.getDamage(Element.Mineral, 6) );
 						break;
 					case "Fluid Fire":
-						Instantiate(boneFire);
+						Instantiate(fluidFire);
 						ReduceEnemyHealth( _currentEnemyStats.getDamage(Element.Fluid, 6) );
-		    			Instantiate(fluidParticles);
-	    				ReduceEnemyHealth(2);
+		    			Instantiate(plantCrazyParticles);
 	        			break;
 					default:
 						break;
