@@ -7,7 +7,7 @@ public class Gun : MonoBehaviour {
 	public bool Tutorial = false;
 	bool _trackingKeys;
 	float _currentTime;
-	float _allowedTime = 2.0f;
+	float _allowedTime = 1.8f;
 
 	bool _actionInQueue;
 	string _actionName;
@@ -40,6 +40,10 @@ public class Gun : MonoBehaviour {
 	GameObject plantParticles;
 	GameObject mineralParticles;
 	GameObject fluidParticles;
+	GameObject boneCrazyParticles;
+	GameObject plantCrazyParticles;
+	GameObject mineralCrazyParticles;
+	GameObject fluidCrazyParticles;
 
 	// actions
 	GameObject smoke;
@@ -52,10 +56,12 @@ public class Gun : MonoBehaviour {
 	GameObject mineralMachineGun;
 	GameObject fluidMachineGun;
 	GameObject boneFire;
+	GameObject plantFire;
+	GameObject mineralFire;
+	GameObject fluidFire;
 
 	// extra actions
 	GameObject blueBullet;
-	GameObject flames;
 	
 	// Enemies
 	public int respawnTime = 300;
@@ -66,7 +72,7 @@ public class Gun : MonoBehaviour {
 
 	void Start () {
 		_barrel = transform.Find("Barrel").GetComponent<Animator>();
-		_cauldron = GameObject.Find("Cauldron").GetComponent<Animator>();
+		_cauldron = transform.Find("Cauldron").GetComponent<Animator>();
 
 		_enemyStatsList = new List<EnemyStats>();
 		_keys = new List<KeyType>();
@@ -98,6 +104,10 @@ public class Gun : MonoBehaviour {
 		plantParticles = (GameObject)Resources.Load("PlantParticles");
 		mineralParticles = (GameObject)Resources.Load("MineralParticles");
 		fluidParticles = (GameObject)Resources.Load("FluidParticles");
+		boneCrazyParticles = (GameObject)Resources.Load("BoneCrazyParticles");
+		plantCrazyParticles = (GameObject)Resources.Load("PlantCrazyParticles");
+		mineralCrazyParticles = (GameObject)Resources.Load("MineralCrazyParticles");
+		fluidCrazyParticles = (GameObject)Resources.Load("FluidCrazyParticles");
 		
 		// actions
 		smoke = (GameObject)Resources.Load("Smoke");
@@ -109,11 +119,13 @@ public class Gun : MonoBehaviour {
 		plantMachineGun = (GameObject)Resources.Load("PlantMachineGun");
 		mineralMachineGun = (GameObject)Resources.Load("MineralMachineGun");
 		fluidMachineGun = (GameObject)Resources.Load("FluidMachineGun");
-		boneFire = (GameObject)Resources.Load("BlueBullet");
+		boneFire = (GameObject)Resources.Load("BoneFire");
+		plantFire = (GameObject)Resources.Load("PlantFire");
+		mineralFire = (GameObject)Resources.Load("MineralFire");
+		fluidFire = (GameObject)Resources.Load("FluidFire");
 
 		// extra actions
 		blueBullet = (GameObject)Resources.Load("BlueBullet");
-		flames = (GameObject)Resources.Load("Flames");
 	}
 
 	void SpawnIngredient(KeyType key) {

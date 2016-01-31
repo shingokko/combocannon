@@ -24,7 +24,7 @@ public class NewGame : Listable {
 
 	void Update() {
 		if (selected && Input.GetKeyDown(KeyCode.Return)) {
-			SceneManager.LoadScene("Intro");
+			SceneManager.LoadScene("Game");
 		}
 	}
 
@@ -36,6 +36,6 @@ public class NewGame : Listable {
 	}
 
 	void OnMouseUp() {
-		SceneManager.LoadScene("Intro");
+		SceneManager.LoadScene("Game");
 	}
 }
