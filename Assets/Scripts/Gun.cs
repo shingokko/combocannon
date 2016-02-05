@@ -204,27 +204,27 @@ public class Gun : MonoBehaviour {
 			return;
 		}
 
-        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.A))) {
+        if (Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.A))) {
         	_keys.Add(KeyType.A);
         	keyPressed = KeyType.A;
         }
 
-        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.B))) {
+        if (Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.B))) {
         	_keys.Add(KeyType.B);
         	keyPressed = KeyType.B;
         }
 
-        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.C))) {
+        if (Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.C))) {
         	_keys.Add(KeyType.C);
         	keyPressed = KeyType.C;
         }
 
-        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.D))) {
+        if (Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.D))) {
         	_keys.Add(KeyType.D);
         	keyPressed = KeyType.D;
         }
 
-        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.Trigger))) {
+        if (Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.Trigger))) {
         	_keys.Add(KeyType.Trigger);
         	keyPressed = KeyType.Trigger;
         }
