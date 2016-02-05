@@ -1,58 +1,126 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Monster : MonoBehaviour {
-	public float _moveSpeed = 2;
-	public float _maxDistance = 0.2f;
-	public bool moveUpAndDownInstead;
-	float _currentWaitTime;
-	float _maxWaitTime = 0.2f;
-	int _direction = 1;
-	float _startingXPos = 0;
-	float _startingYPos = 0;
-	float _left = 0;
-	float _top = 0;
-	float _right = 0;
-	float _down = 0;
-	Vector3 _velocity;
+	//Status
+	private int counter = 0;
+	public int attackStats;
 
+	//Actions bool
+	private bool defeated;
+	private bool stun;
+	private bool attack;
+	public int lifeLastF;
+
+	public int attackSpeed;
+	public int stunDamage;
+
+
+	
+	// Use this for initialization
 	void Start () {
-		_currentWaitTime = 0;
-		_velocity = Vector3.zero;
-		_startingXPos = transform.position.x;
-		_startingYPos = transform.position.y;
-		_left = _startingXPos - _maxDistance;
-		_top = _startingYPos + _maxDistance;
-		_right = _startingXPos + _maxDistance;
-		_down = _startingYPos - _maxDistance;
+		defeated = false;
+		stun = false;
+		attack = false;
+
 	}
 	
+	// Update is called once per frame
 	void Update () {
-		_currentWaitTime += Time.deltaTime;
 
-		if (_currentWaitTime > _maxWaitTime) {
-			_currentWaitTime = 0;
+			
 
-			if (moveUpAndDownInstead) {
-				_velocity.y = _moveSpeed * _direction;
-
-				if ((_direction == 1 && transform.position.y > _top) || _direction == -1 && transform.position.y < _down) {
-					_direction *= -1; // face the other way
-				}
-
-				_velocity.x = 0;
-			}
-			else {
-				_velocity.x = _moveSpeed * _direction;
-
-				if ((_direction == 1 && transform.position.x > _right) || _direction == -1 && transform.position.x < _left) {
-					_direction *= -1; // face the other way
-				}
-
-				_velocity.y = 0;
-			}
-
-			transform.Translate(_velocity * Time.deltaTime);
+		//Die / defeated
+		if (EnemyHealth.Instance.currentHealth <= 0 && !defeated){
+			counter = 0;
+			defeated = true;
 		}
+
+		if (!stun && lifeLastF - EnemyHealth.Instance.currentHealth >= stunDamage){
+			stun = true;
+			//Cancel Attack
+			if(attack){
+				attack = false;
+			}
+			counter = 0;
+		}
+
+		if(defeated && counter <= 50){
+			if( counter % 4 < 2){
+				transform.Translate(Vector3.left * 0.1f);
+			}else{
+				transform.Translate(Vector3.right * 0.1f);
+			}	
+		}else if(defeated && counter <= 70){
+			//zoom out
+			transform.localScale -= new Vector3(0.05f, 0.05f,0.05f);
+		}else if(defeated && counter > 70){
+			die();
+		}
+
+		//stun
+		if(stun && !defeated && counter < 20){
+			if( counter % 4 < 2){
+				transform.Translate(Vector3.left * 0.1f);
+			}else{
+				transform.Translate(Vector3.right * 0.1f);
+			}
+		}else if(stun && !defeated && counter == 20){
+			transform.position = new Vector3(-0.4325213f, 0, 0);
+			transform.localScale = new Vector3(0.852808f, 0.852808f,0.852808f);
+			counter = 0;
+			stun = false;
+			lifeLastF = EnemyHealth.Instance.currentHealth;
+		}
+
+
+		if(PlayerHealth.Instance.currentHealth == 0){
+			transform.localScale = new Vector3(2f, 2f,2f);
+			transform.position = new Vector3(0, -5f, 0);
+			counter = 0;
+		}else{
+			if(!attack && !defeated && !stun){
+				transform.localScale += new Vector3(0.0012f, 0.0012f,0.0012f);	
+			}
+			counter += 1;
+		}
+
+		//Attack
+		if(counter == attackSpeed - 100 && PlayerHealth.Instance.currentHealth != 0 && !attack){
+			attack = true;
+			counter = 0;
+		}
+		if(counter == 50 && attack){
+			transform.localScale = new Vector3(2f, 2f,2f);
+			transform.position = new Vector3(0, -5f, 0);
+			PlayerHealth.Instance.shake = 1f;
+			if(PlayerHealth.Instance.currentHealth - attackStats < 0){
+				PlayerHealth.Instance.currentHealth = 0;
+			}else{
+				PlayerHealth.Instance.currentHealth -= attackStats;
+			}
+
+			ElementEffect.Instance.playerDamage = "- " + attackStats;
+			ElementEffect.Instance.playerDamageChanged = true;
+			counter += 1;
+
+			
+		}else if(counter == 100 && attack){
+			attack = false;
+			counter = 0;
+			transform.localScale = new Vector3(0.852808f, 0.852808f,0.852808f);
+			transform.position = new Vector3(-0.4325213f, 0, 0);
+					
+		}
+
+		if(counter%150 == 0){
+			lifeLastF = EnemyHealth.Instance.currentHealth;
+		}
+	}
+
+	protected void die(){
+		Destroy(gameObject);
+		GameData.Instance.score += 100;
 	}
 }

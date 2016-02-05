@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class Menu : MonoBehaviour {
+public class Menu : Listable {
+	public bool selected = false;
 	void OnMouseDown() {
 		transform.localScale *= 0.9f;
 	}
@@ -10,4 +11,27 @@ public class Menu : MonoBehaviour {
 	void OnMouseUp() {
 		SceneManager.LoadScene("Menu");
 	}
+
+	void Update() {
+		if (selected && Controller.GetKeyDown(KeyCode.Return)) {
+			SceneManager.LoadScene("Menu");
+		}
+	}
+
+	public override void setSelect(bool select) {
+		if (select != selected) {
+			if (select) {
+				transform.localScale /= 0.9f;
+				selected = true;
+			} else {
+				transform.localScale *= 0.9f;
+				selected = false;
+			}
+		}
+	}
+
+	public override bool getSelect() {
+		return selected;
+	}
+ 
 }
