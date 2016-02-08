@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(EnemyStatsTracker))]
+[RequireComponent(typeof(GunPrefabs))]
 public class Gun : MonoBehaviour
 {
     bool _trackingKeys;
@@ -23,47 +24,7 @@ public class Gun : MonoBehaviour
     IList<KeyType> _keys;
     IList<KeySequence> _keySequences;
 
-    GameObject boneIngredient1;
-    GameObject boneIngredient2;
-    GameObject boneIngredient3;
-    GameObject plantIngredient1;
-    GameObject plantIngredient2;
-    GameObject plantIngredient3;
-    GameObject mineralIngredient1;
-    GameObject mineralIngredient2;
-    GameObject mineralIngredient3;
-    GameObject fluidIngredient1;
-    GameObject fluidIngredient2;
-    GameObject fluidIngredient3;
-
-    // particles
-    GameObject boneParticles;
-    GameObject plantParticles;
-    GameObject mineralParticles;
-    GameObject fluidParticles;
-    GameObject boneCrazyParticles;
-    GameObject plantCrazyParticles;
-    GameObject mineralCrazyParticles;
-    GameObject fluidCrazyParticles;
-
-    // actions
-    GameObject smoke;
-    GameObject boneBullet;
-    GameObject plantBullet;
-    GameObject mineralBullet;
-    GameObject fluidBullet;
-    GameObject boneMachineGun;
-    GameObject plantMachineGun;
-    GameObject mineralMachineGun;
-    GameObject fluidMachineGun;
-    GameObject boneFire;
-    GameObject plantFire;
-    GameObject mineralFire;
-    GameObject fluidFire;
-
-    // extra actions
-    GameObject blueBullet;
-
+    GunPrefabs _gunPrefabs;
     EnemyStatsTracker _enemyStatsTracker;
 
     void Start()
@@ -74,54 +35,8 @@ public class Gun : MonoBehaviour
         _keys = new List<KeyType>();
         _keySequences = Preferences.Instance.RecipeList;
 
-        LoadPrefabs();
-
+        _gunPrefabs = GetComponent<GunPrefabs>();
         _enemyStatsTracker = GetComponent<EnemyStatsTracker>();
-    }
-
-    void LoadPrefabs()
-    {
-        // ingredients
-        plantIngredient1 = (GameObject)Resources.Load("IngredientA_1");
-        plantIngredient2 = (GameObject)Resources.Load("IngredientA_2");
-        plantIngredient3 = (GameObject)Resources.Load("IngredientA_3");
-        boneIngredient1 = (GameObject)Resources.Load("IngredientB_1");
-        boneIngredient2 = (GameObject)Resources.Load("IngredientB_2");
-        boneIngredient3 = (GameObject)Resources.Load("IngredientB_3");
-        mineralIngredient1 = (GameObject)Resources.Load("IngredientC_1");
-        mineralIngredient2 = (GameObject)Resources.Load("IngredientC_2");
-        mineralIngredient3 = (GameObject)Resources.Load("IngredientC_3");
-        fluidIngredient1 = (GameObject)Resources.Load("IngredientD_1");
-        fluidIngredient2 = (GameObject)Resources.Load("IngredientD_2");
-        fluidIngredient3 = (GameObject)Resources.Load("IngredientD_3");
-
-        // particles
-        boneParticles = (GameObject)Resources.Load("BoneParticles");
-        plantParticles = (GameObject)Resources.Load("PlantParticles");
-        mineralParticles = (GameObject)Resources.Load("MineralParticles");
-        fluidParticles = (GameObject)Resources.Load("FluidParticles");
-        boneCrazyParticles = (GameObject)Resources.Load("BoneCrazyParticles");
-        plantCrazyParticles = (GameObject)Resources.Load("PlantCrazyParticles");
-        mineralCrazyParticles = (GameObject)Resources.Load("MineralCrazyParticles");
-        fluidCrazyParticles = (GameObject)Resources.Load("FluidCrazyParticles");
-
-        // actions
-        smoke = (GameObject)Resources.Load("Smoke");
-        boneBullet = (GameObject)Resources.Load("BoneBullet");
-        plantBullet = (GameObject)Resources.Load("PlantBullet");
-        mineralBullet = (GameObject)Resources.Load("MineralBullet");
-        fluidBullet = (GameObject)Resources.Load("FluidBullet");
-        boneMachineGun = (GameObject)Resources.Load("BoneMachineGun");
-        plantMachineGun = (GameObject)Resources.Load("PlantMachineGun");
-        mineralMachineGun = (GameObject)Resources.Load("MineralMachineGun");
-        fluidMachineGun = (GameObject)Resources.Load("FluidMachineGun");
-        boneFire = (GameObject)Resources.Load("BoneFire");
-        plantFire = (GameObject)Resources.Load("PlantFire");
-        mineralFire = (GameObject)Resources.Load("MineralFire");
-        fluidFire = (GameObject)Resources.Load("FluidFire");
-
-        // extra actions
-        blueBullet = (GameObject)Resources.Load("BlueBullet");
     }
 
     void SpawnIngredient(KeyType key)
@@ -234,13 +149,13 @@ public class Gun : MonoBehaviour
             switch (ingredientVersion)
             {
                 case 1:
-                    ingredient = plantIngredient1;
+                    ingredient = _gunPrefabs.plantIngredient1;
                     break;
                 case 2:
-                    ingredient = plantIngredient2;
+                    ingredient = _gunPrefabs.plantIngredient2;
                     break;
                 default:
-                    ingredient = plantIngredient3;
+                    ingredient = _gunPrefabs.plantIngredient3;
                     break;
             }
         }
@@ -250,13 +165,13 @@ public class Gun : MonoBehaviour
             switch (ingredientVersion)
             {
                 case 1:
-                    ingredient = boneIngredient1;
+                    ingredient = _gunPrefabs.boneIngredient1;
                     break;
                 case 2:
-                    ingredient = boneIngredient2;
+                    ingredient = _gunPrefabs.boneIngredient2;
                     break;
                 default:
-                    ingredient = boneIngredient3;
+                    ingredient = _gunPrefabs.boneIngredient3;
                     break;
             }
         }
@@ -266,13 +181,13 @@ public class Gun : MonoBehaviour
             switch (ingredientVersion)
             {
                 case 1:
-                    ingredient = mineralIngredient1;
+                    ingredient = _gunPrefabs.mineralIngredient1;
                     break;
                 case 2:
-                    ingredient = mineralIngredient2;
+                    ingredient = _gunPrefabs.mineralIngredient2;
                     break;
                 default:
-                    ingredient = mineralIngredient3;
+                    ingredient = _gunPrefabs.mineralIngredient3;
                     break;
             }
         }
@@ -282,13 +197,13 @@ public class Gun : MonoBehaviour
             switch (ingredientVersion)
             {
                 case 1:
-                    ingredient = fluidIngredient1;
+                    ingredient = _gunPrefabs.fluidIngredient1;
                     break;
                 case 2:
-                    ingredient = fluidIngredient2;
+                    ingredient = _gunPrefabs.fluidIngredient2;
                     break;
                 default:
-                    ingredient = fluidIngredient3;
+                    ingredient = _gunPrefabs.fluidIngredient3;
                     break;
             }
         }
@@ -375,7 +290,7 @@ public class Gun : MonoBehaviour
             {
                 if (keySequenceIsValidSoFar)
                 {
-                    Instantiate(smoke);
+                    Instantiate(_gunPrefabs.smoke);
                 }
 
                 _keys = new List<KeyType>();
@@ -392,6 +307,150 @@ public class Gun : MonoBehaviour
             }
         }
     }
+
+    void QueueAction()
+    {
+        if (!_actionInQueue)
+        {
+            foreach (var keySequence in _keySequences)
+            {
+                if (keySequence.Check(_keys))
+                {
+                    Invoke("CloseCauldron", 0.4f);
+
+                    _actionInQueue = true;
+                    _currentDelay = 0;
+                    _actionName = keySequence.name;
+
+                    // now an action has been triggered, reset keys
+                    _keys = new List<KeyType>();
+                }
+            }
+        }
+    }
+
+    void TriggerAction()
+    {
+        if (_actionInQueue)
+        {
+            _currentDelay += Time.deltaTime;
+            if (_currentDelay > _delayActionBy)
+            {
+                var attackWith = Element.Unknown;
+                var baseDamage = 0;
+
+                switch (_actionName)
+                {
+                    case "Bone Bullet":
+                        Instantiate(_gunPrefabs.boneBullet);
+                        Instantiate(_gunPrefabs.fluidParticles);
+
+                        attackWith = Element.Bone;
+                        baseDamage = 2;
+                        break;
+                    case "Plant Bullet":
+                        Instantiate(_gunPrefabs.plantBullet);
+                        Instantiate(_gunPrefabs.boneParticles);
+
+                        attackWith = Element.Plant;
+                        baseDamage = 2;
+                        break;
+                    case "Mineral Bullet":
+                        Instantiate(_gunPrefabs.mineralBullet);
+                        Instantiate(_gunPrefabs.plantParticles);
+
+                        attackWith = Element.Mineral;
+                        baseDamage = 2;
+                        break;
+                    case "Fluid Bullet":
+                        Instantiate(_gunPrefabs.fluidBullet);
+                        Instantiate(_gunPrefabs.mineralParticles);
+
+                        attackWith = Element.Fluid;
+                        baseDamage = 2;
+                        break;
+                    case "Bone Machine Gun":
+                        Instantiate(_gunPrefabs.boneMachineGun);
+                        Instantiate(_gunPrefabs.mineralParticles);
+
+                        attackWith = Element.Bone;
+                        baseDamage = 4;
+                        break;
+                    case "Plant Machine Gun":
+                        Instantiate(_gunPrefabs.plantMachineGun);
+                        Instantiate(_gunPrefabs.boneParticles);
+
+                        attackWith = Element.Plant;
+                        baseDamage = 4;
+                        break;
+                    case "Mineral Machine Gun":
+                        Instantiate(_gunPrefabs.mineralMachineGun);
+                        Instantiate(_gunPrefabs.fluidParticles);
+
+                        attackWith = Element.Mineral;
+                        baseDamage = 4;
+                        break;
+                    case "Fluid Machine Gun":
+                        Instantiate(_gunPrefabs.fluidMachineGun);
+                        Instantiate(_gunPrefabs.boneParticles);
+
+                        attackWith = Element.Fluid;
+                        baseDamage = 4;
+                        break;
+                    case "Bone Fire":
+                        Instantiate(_gunPrefabs.boneFire);
+                        Instantiate(_gunPrefabs.fluidCrazyParticles);
+
+                        attackWith = Element.Bone;
+                        baseDamage = 6;
+                        break;
+                    case "Plant Fire":
+                        Instantiate(_gunPrefabs.plantFire);
+                        Instantiate(_gunPrefabs.mineralCrazyParticles);
+
+                        attackWith = Element.Plant;
+                        baseDamage = 6;
+                        break;
+                    case "Mineral Fire":
+                        Instantiate(_gunPrefabs.mineralFire);
+                        Instantiate(_gunPrefabs.boneCrazyParticles);
+
+                        attackWith = Element.Mineral;
+                        baseDamage = 6;
+                        break;
+                    case "Fluid Fire":
+                        Instantiate(_gunPrefabs.fluidFire);
+                        Instantiate(_gunPrefabs.plantCrazyParticles);
+
+                        attackWith = Element.Fluid;
+                        baseDamage = 6;
+                        break;
+                    default:
+                        break;
+                }
+
+                if (attackWith != Element.Unknown && baseDamage > 0)
+                {
+                    _enemyStatsTracker.ReduceEnemyHealth(attackWith, baseDamage);
+                }
+
+                _actionInQueue = false;
+                _currentDelay = 0;
+                _actionName = string.Empty;
+            }
+        }
+    }
+
+    void Update()
+    {
+        TrackKeys();
+        QueueAction();
+        TriggerAction();
+
+        _enemyStatsTracker.RespawnEnemyIfDead();
+    }
+
+    #region - Animations -
 
     void SetIdle()
     {
@@ -417,142 +476,5 @@ public class Gun : MonoBehaviour
         _cauldron.speed = 1;
     }
 
-    void TriggerAction()
-    {
-        if (_actionInQueue)
-        {
-            _currentDelay += Time.deltaTime;
-            if (_currentDelay > _delayActionBy)
-            {
-                var attackWith = Element.Unknown;
-                var baseDamage = 0;
-
-                switch (_actionName)
-                {
-                    case "Bone Bullet":
-                        Instantiate(boneBullet);
-                        Instantiate(fluidParticles);
-
-                        attackWith = Element.Bone;
-                        baseDamage = 2;
-                        break;
-                    case "Plant Bullet":
-                        Instantiate(plantBullet);
-                        Instantiate(boneParticles);
-
-                        attackWith = Element.Plant;
-                        baseDamage = 2;
-                        break;
-                    case "Mineral Bullet":
-                        Instantiate(mineralBullet);
-                        Instantiate(plantParticles);
-
-                        attackWith = Element.Mineral;
-                        baseDamage = 2;
-                        break;
-                    case "Fluid Bullet":
-                        Instantiate(fluidBullet);
-                        Instantiate(mineralParticles);
-
-                        attackWith = Element.Fluid;
-                        baseDamage = 2;
-                        break;
-                    case "Bone Machine Gun":
-                        Instantiate(boneMachineGun);
-                        Instantiate(mineralParticles);
-
-                        attackWith = Element.Bone;
-                        baseDamage = 4;
-                        break;
-                    case "Plant Machine Gun":
-                        Instantiate(plantMachineGun);
-                        Instantiate(boneParticles);
-
-                        attackWith = Element.Plant;
-                        baseDamage = 4;
-                        break;
-                    case "Mineral Machine Gun":
-                        Instantiate(mineralMachineGun);
-                        Instantiate(fluidParticles);
-
-                        attackWith = Element.Mineral;
-                        baseDamage = 4;
-                        break;
-                    case "Fluid Machine Gun":
-                        Instantiate(fluidMachineGun);
-                        Instantiate(boneParticles);
-
-                        attackWith = Element.Fluid;
-                        baseDamage = 4;
-                        break;
-                    case "Bone Fire":
-                        Instantiate(boneFire);
-                        Instantiate(fluidCrazyParticles);
-
-                        attackWith = Element.Bone;
-                        baseDamage = 6;
-                        break;
-                    case "Plant Fire":
-                        Instantiate(plantFire);
-                        Instantiate(mineralCrazyParticles);
-
-                        attackWith = Element.Plant;
-                        baseDamage = 6;
-                        break;
-                    case "Mineral Fire":
-                        Instantiate(mineralFire);
-                        Instantiate(boneCrazyParticles);
-
-                        attackWith = Element.Mineral;
-                        baseDamage = 6;
-                        break;
-                    case "Fluid Fire":
-                        Instantiate(fluidFire);
-                        Instantiate(plantCrazyParticles);
-
-                        attackWith = Element.Fluid;
-                        baseDamage = 6;
-                        break;
-                    default:
-                        break;
-                }
-
-                if (attackWith != Element.Unknown && baseDamage > 0)
-                {
-                    _enemyStatsTracker.ReduceEnemyHealth(attackWith, baseDamage);
-                }
-
-                _actionInQueue = false;
-                _currentDelay = 0;
-                _actionName = string.Empty;
-            }
-        }
-    }
-
-    void Update()
-    {
-        TrackKeys();
-
-        if (!_actionInQueue)
-        {
-            foreach (var keySequence in _keySequences)
-            {
-                if (keySequence.Check(_keys))
-                {
-                    Invoke("CloseCauldron", 0.4f);
-
-                    _actionInQueue = true;
-                    _currentDelay = 0;
-                    _actionName = keySequence.name;
-
-                    // now an action has been triggered, reset keys
-                    _keys = new List<KeyType>();
-                }
-            }
-        }
-
-        TriggerAction();
-
-        _enemyStatsTracker.RespawnEnemyIfDead();
-    }
+    #endregion
 }
