@@ -51,17 +51,16 @@ public class Gun : MonoBehaviour
 
         GameObject ingredient = null;
 
-<<<<<<< HEAD
     	if (key == KeyType.A) {
     		switch (ingredientVersion) {
     			case 1:
-    				ingredient = plantIngredient1;
+                    ingredient = _gunPrefabs.plantIngredient1;
     				break;
 				case 2:
-    				ingredient = plantIngredient2;
+                    ingredient = _gunPrefabs.plantIngredient2;
 					break;
 				default:
-    				ingredient = plantIngredient3;
+                    ingredient = _gunPrefabs.plantIngredient3;
 					break;
     		}
     	}
@@ -69,13 +68,13 @@ public class Gun : MonoBehaviour
     	if (key == KeyType.B) {
     		switch (ingredientVersion) {
     			case 1:
-    				ingredient = boneIngredient1;
+                    ingredient = _gunPrefabs.boneIngredient1;
     				break;
 				case 2:
-    				ingredient = boneIngredient2;
+                    ingredient = _gunPrefabs.boneIngredient2;
 					break;
 				default:
-    				ingredient = boneIngredient3;
+                    ingredient = _gunPrefabs.boneIngredient3;
 					break;
     		}
     	}
@@ -83,13 +82,13 @@ public class Gun : MonoBehaviour
     	if (key == KeyType.C) {
     		switch (ingredientVersion) {
     			case 1:
-    				ingredient = mineralIngredient1;
+                    ingredient = _gunPrefabs.mineralIngredient1;
     				break;
 				case 2:
-    				ingredient = mineralIngredient2;
+                    ingredient = _gunPrefabs.mineralIngredient2;
 					break;
 				default:
-    				ingredient = mineralIngredient3;
+                    ingredient = _gunPrefabs.mineralIngredient3;
 					break;
     		}
     	}
@@ -97,13 +96,13 @@ public class Gun : MonoBehaviour
     	if (key == KeyType.D) {
     		switch (ingredientVersion) {
     			case 1:
-    				ingredient = fluidIngredient1;
+                    ingredient = _gunPrefabs.fluidIngredient1;
     				break;
 				case 2:
-    				ingredient = fluidIngredient2;
+                    ingredient = _gunPrefabs.fluidIngredient2;
 					break;
 				default:
-    				ingredient = fluidIngredient3;
+                    ingredient = _gunPrefabs.fluidIngredient3;
 					break;
     		}
     	}
@@ -143,115 +142,6 @@ public class Gun : MonoBehaviour
         if (Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.Trigger))) {
         	_keys.Add(KeyType.Trigger);
         	keyPressed = KeyType.Trigger;
-=======
-        if (key == KeyType.A)
-        {
-            switch (ingredientVersion)
-            {
-                case 1:
-                    ingredient = _gunPrefabs.plantIngredient1;
-                    break;
-                case 2:
-                    ingredient = _gunPrefabs.plantIngredient2;
-                    break;
-                default:
-                    ingredient = _gunPrefabs.plantIngredient3;
-                    break;
-            }
-        }
-
-        if (key == KeyType.B)
-        {
-            switch (ingredientVersion)
-            {
-                case 1:
-                    ingredient = _gunPrefabs.boneIngredient1;
-                    break;
-                case 2:
-                    ingredient = _gunPrefabs.boneIngredient2;
-                    break;
-                default:
-                    ingredient = _gunPrefabs.boneIngredient3;
-                    break;
-            }
-        }
-
-        if (key == KeyType.C)
-        {
-            switch (ingredientVersion)
-            {
-                case 1:
-                    ingredient = _gunPrefabs.mineralIngredient1;
-                    break;
-                case 2:
-                    ingredient = _gunPrefabs.mineralIngredient2;
-                    break;
-                default:
-                    ingredient = _gunPrefabs.mineralIngredient3;
-                    break;
-            }
-        }
-
-        if (key == KeyType.D)
-        {
-            switch (ingredientVersion)
-            {
-                case 1:
-                    ingredient = _gunPrefabs.fluidIngredient1;
-                    break;
-                case 2:
-                    ingredient = _gunPrefabs.fluidIngredient2;
-                    break;
-                default:
-                    ingredient = _gunPrefabs.fluidIngredient3;
-                    break;
-            }
-        }
-
-        if (ingredient != null)
-        {
-            Instantiate(ingredient);
-        }
-    }
-
-    void TrackKeys()
-    {
-        var currentKeyCount = _keys.Count;
-        var keyPressed = KeyType.Unknown;
-        if (EnemyHealth.Instance.currentHealth <= 0)
-        {
-            return;
-        }
-
-        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.A)))
-        {
-            _keys.Add(KeyType.A);
-            keyPressed = KeyType.A;
-        }
-
-        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.B)))
-        {
-            _keys.Add(KeyType.B);
-            keyPressed = KeyType.B;
->>>>>>> shingo-branch
-        }
-
-        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.C)))
-        {
-            _keys.Add(KeyType.C);
-            keyPressed = KeyType.C;
-        }
-
-        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.D)))
-        {
-            _keys.Add(KeyType.D);
-            keyPressed = KeyType.D;
-        }
-
-        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.Trigger)))
-        {
-            _keys.Add(KeyType.Trigger);
-            keyPressed = KeyType.Trigger;
         }
 
         if (currentKeyCount == 0 && _keys.Count > 0)
@@ -262,7 +152,8 @@ public class Gun : MonoBehaviour
         if (_keys.Count == 0)
         {
             _trackingKeys = false;
-        } else
+        }
+        else
         {
             if (currentKeyCount == 0)
             {
@@ -297,7 +188,8 @@ public class Gun : MonoBehaviour
                 _currentTime = 0;
 
                 SetIdle();
-            } else
+            }
+            else
             {
                 if (keySequenceIsValidSoFar)
                 {
