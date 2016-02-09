@@ -31,10 +31,10 @@ public class CannonContentsDisplay : MonoBehaviour
         switch (keyType)
         {
             case KeyType.A:
-                prefab = boneIcon;
+                prefab = plantIcon;
                 break;
             case KeyType.B:
-                prefab = plantIcon;
+                prefab = boneIcon;
                 break;
             case KeyType.C:
                 prefab = mineralIcon;
