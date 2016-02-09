@@ -13,9 +13,15 @@ public class CannonContentsDisplay : MonoBehaviour
 
     IList<GameObject> _icons;
 
+    AudioSource _poofAudio;
+    AudioSource _successAudio;
+
     void Start()
     {
         _icons = new List<GameObject>();
+
+        _poofAudio = transform.Find("Poof").GetComponent<AudioSource>();
+        _successAudio = transform.Find("Success").GetComponent<AudioSource>();
     }
 
     public void AddIconByKeyType(KeyType keyType)
@@ -47,7 +53,7 @@ public class CannonContentsDisplay : MonoBehaviour
                 transform.position.y,
                 transform.position.z + (_icons.Count - 1)
             );
-
+            
             GameObject newIcon = Instantiate(prefab);
             _icons.Add(newIcon);
         }
@@ -71,6 +77,8 @@ public class CannonContentsDisplay : MonoBehaviour
 
             if (showSmoke)
             {
+                PlayPoof();
+
                 // add smoke
                 smoke.transform.position = new Vector3
                 (
@@ -84,6 +92,8 @@ public class CannonContentsDisplay : MonoBehaviour
 
             if (consume)
             {
+                Invoke("PlaySuccess", 0.25f);
+
                 var animator = icon.GetComponent<Animator>();
                 animator.Play("element-icon-consumed");
                 Destroy(icon, 2);
@@ -96,5 +106,15 @@ public class CannonContentsDisplay : MonoBehaviour
 
         // icons should be all removed now, re-instantiate list
         _icons = new List<GameObject>();
+    }
+
+    void PlayPoof()
+    {
+        _poofAudio.Play();
+    }
+
+    void PlaySuccess()
+    {
+        _successAudio.Play();
     }
 }
