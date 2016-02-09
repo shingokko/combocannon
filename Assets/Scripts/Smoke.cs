@@ -31,7 +31,7 @@ public class Smoke : MonoBehaviour {
         _currentTime += Time.deltaTime;
         if (_currentTime > _waitTime) {
 			if (gameObject != null) {
-        		Destroy(gameObject, 0.2f);
+        		Destroy(gameObject, 0.15f);
 			}
         }
 	}

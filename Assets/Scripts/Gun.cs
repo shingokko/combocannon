@@ -26,6 +26,7 @@ public class Gun : MonoBehaviour
 
     GunPrefabs _gunPrefabs;
     EnemyStatsTracker _enemyStatsTracker;
+    CannonContentsDisplay _cannonContentsDisplay;
 
     void Start()
     {
@@ -37,6 +38,8 @@ public class Gun : MonoBehaviour
 
         _gunPrefabs = GetComponent<GunPrefabs>();
         _enemyStatsTracker = GetComponent<EnemyStatsTracker>();
+
+        _cannonContentsDisplay = GameObject.Find("CannonContentsDisplay").GetComponent<CannonContentsDisplay>();
     }
 
     void SpawnIngredient(KeyType key)
@@ -47,7 +50,6 @@ public class Gun : MonoBehaviour
         }
 
         var ingredientVersion = UnityEngine.Random.Range(1, 4);
-        Debug.Log("" + ingredientVersion);
 
         GameObject ingredient = null;
 
@@ -179,12 +181,9 @@ public class Gun : MonoBehaviour
 
             if (_currentTime > _allowedTime)
             {
-                if (keySequenceIsValidSoFar)
-                {
-                    Instantiate(_gunPrefabs.smoke);
-                }
-
                 _keys = new List<KeyType>();
+                Instantiate(_gunPrefabs.smoke);
+                _cannonContentsDisplay.ClearIcons();
                 _currentTime = 0;
 
                 SetIdle();
@@ -195,6 +194,7 @@ public class Gun : MonoBehaviour
                 {
                     OpenCauldron();
                     SpawnIngredient(keyPressed);
+                    _cannonContentsDisplay.AddIconByKeyType(keyPressed);
                 }
             }
         }
@@ -202,21 +202,21 @@ public class Gun : MonoBehaviour
 
     void QueueAction()
     {
-        if (!_actionInQueue)
+        if (_actionInQueue) { return; }
+
+        foreach (var keySequence in _keySequences)
         {
-            foreach (var keySequence in _keySequences)
+            if (keySequence.Check(_keys))
             {
-                if (keySequence.Check(_keys))
-                {
-                    Invoke("CloseCauldron", 0.4f);
+                Invoke("CloseCauldron", 0.4f);
 
-                    _actionInQueue = true;
-                    _currentDelay = 0;
-                    _actionName = keySequence.name;
+                _actionInQueue = true;
+                _currentDelay = 0;
+                _actionName = keySequence.name;
 
-                    // now an action has been triggered, reset keys
-                    _keys = new List<KeyType>();
-                }
+                // now an action has been triggered, reset keys
+                _keys = new List<KeyType>();
+                _cannonContentsDisplay.ClearIcons(false, true);
             }
         }
     }
