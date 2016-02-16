@@ -14,7 +14,7 @@ public class ConfigList : MonoBehaviour {
 			Debug.Log("Down");
 		}
 
-		if (Input.GetKeyDown("up")) {
+		if (Controller.GetKeyDown("up")) {
 			prev();
 			Debug.Log("Up");
 		}

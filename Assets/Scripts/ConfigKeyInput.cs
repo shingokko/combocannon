@@ -38,6 +38,12 @@ public class ConfigKeyInput : Listable {
         }
         
     }
+	void Update() {
+		KeyCode k = Controller.GetLastButton();
+		if (k != KeyCode.None && k != KeyCode.UpArrow && k != KeyCode.DownArrow && selected) {
+			UpdateBinding(Controller.GetLastButton());
+		}
+	}
 
     //Used by the user in the Config screen to remap a key.
 

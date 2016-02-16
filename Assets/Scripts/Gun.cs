@@ -53,113 +53,97 @@ public class Gun : MonoBehaviour
 
         GameObject ingredient = null;
 
-        if (key == KeyType.A)
-        {
-            switch (ingredientVersion)
-            {
-                case 1:
+    	if (key == KeyType.A) {
+    		switch (ingredientVersion) {
+    			case 1:
                     ingredient = _gunPrefabs.plantIngredient1;
-                    break;
-                case 2:
+    				break;
+				case 2:
                     ingredient = _gunPrefabs.plantIngredient2;
-                    break;
-                default:
+					break;
+				default:
                     ingredient = _gunPrefabs.plantIngredient3;
-                    break;
-            }
-        }
+					break;
+    		}
+    	}
 
-        if (key == KeyType.B)
-        {
-            switch (ingredientVersion)
-            {
-                case 1:
+    	if (key == KeyType.B) {
+    		switch (ingredientVersion) {
+    			case 1:
                     ingredient = _gunPrefabs.boneIngredient1;
-                    break;
-                case 2:
+    				break;
+				case 2:
                     ingredient = _gunPrefabs.boneIngredient2;
-                    break;
-                default:
+					break;
+				default:
                     ingredient = _gunPrefabs.boneIngredient3;
-                    break;
-            }
-        }
+					break;
+    		}
+    	}
 
-        if (key == KeyType.C)
-        {
-            switch (ingredientVersion)
-            {
-                case 1:
+    	if (key == KeyType.C) {
+    		switch (ingredientVersion) {
+    			case 1:
                     ingredient = _gunPrefabs.mineralIngredient1;
-                    break;
-                case 2:
+    				break;
+				case 2:
                     ingredient = _gunPrefabs.mineralIngredient2;
-                    break;
-                default:
+					break;
+				default:
                     ingredient = _gunPrefabs.mineralIngredient3;
-                    break;
-            }
-        }
+					break;
+    		}
+    	}
 
-        if (key == KeyType.D)
-        {
-            switch (ingredientVersion)
-            {
-                case 1:
+    	if (key == KeyType.D) {
+    		switch (ingredientVersion) {
+    			case 1:
                     ingredient = _gunPrefabs.fluidIngredient1;
-                    break;
-                case 2:
+    				break;
+				case 2:
                     ingredient = _gunPrefabs.fluidIngredient2;
-                    break;
-                default:
+					break;
+				default:
                     ingredient = _gunPrefabs.fluidIngredient3;
-                    break;
-            }
+					break;
+    		}
+    	}
+
+    	if (ingredient != null) {
+			Instantiate(ingredient);
+    	}
+	}
+
+	void TrackKeys() {
+		var currentKeyCount = _keys.Count;
+		var keyPressed = KeyType.Unknown;
+		if (EnemyHealth.Instance.currentHealth <= 0) {
+			return;
+		}
+
+        if (Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.A))) {
+        	_keys.Add(KeyType.A);
+        	keyPressed = KeyType.A;
         }
 
-        if (ingredient != null)
-        {
-            Instantiate(ingredient);
-        }
-    }
-
-    void TrackKeys()
-    {
-        var currentKeyCount = _keys.Count;
-        var keyPressed = KeyType.Unknown;
-        if (EnemyHealth.Instance.currentHealth <= 0)
-        {
-            return;
+        if (Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.B))) {
+        	_keys.Add(KeyType.B);
+        	keyPressed = KeyType.B;
         }
 
-        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.A)))
-        {
-            _keys.Add(KeyType.A);
-            keyPressed = KeyType.A;
+        if (Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.C))) {
+        	_keys.Add(KeyType.C);
+        	keyPressed = KeyType.C;
         }
 
-        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.B)))
-        {
-            _keys.Add(KeyType.B);
-            keyPressed = KeyType.B;
+        if (Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.D))) {
+        	_keys.Add(KeyType.D);
+        	keyPressed = KeyType.D;
         }
 
-        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.C)))
-        {
-            _keys.Add(KeyType.C);
-            keyPressed = KeyType.C;
-        }
-
-        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.D)))
-        {
-            _keys.Add(KeyType.D);
-            keyPressed = KeyType.D;
-        }
-
-        if (Input.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.Trigger)))
-        {
-            _keys.Add(KeyType.Trigger);
-            keyPressed = KeyType.Trigger;
+        if (Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.Trigger))) {
+        	_keys.Add(KeyType.Trigger);
+        	keyPressed = KeyType.Trigger;
         }
 
         if (currentKeyCount == 0 && _keys.Count > 0)

@@ -23,7 +23,7 @@ public class Config : Listable {
 	}
 
 	void Update() {
-		if (selected && Input.GetKeyDown(KeyCode.Return)) {
+		if (selected && Controller.GetKeyDown(KeyCode.Return)) {
 			SceneManager.LoadScene("Config");
 		}
 	}

@@ -23,7 +23,7 @@ public class Quit : Listable {
 	}
 
 	void Update() {
-		if (selected && Input.GetKeyDown(KeyCode.Return)) {
+		if (selected && Controller.GetKeyDown(KeyCode.Return)) {
 			Application.Quit();
 		}
 	}
