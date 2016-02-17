@@ -15,62 +15,62 @@ public class Preferences : Singleton<Preferences> {
 		{
 			new KeySequence
 			(
-				"Bone Bullet", new KeyType[] { KeyType.B, KeyType.B, KeyType.Trigger }, Element.Bone, Element.Bone
+				"Bone Bullet", new KeyType[] { KeyType.B, KeyType.B }, Element.Bone, Element.Bone
 			),
 
 			new KeySequence
 			(
-				"Plant Bullet", new KeyType[] { KeyType.B, KeyType.A, KeyType.Trigger }, Element.Plant, Element.Bone
+				"Plant Bullet", new KeyType[] { KeyType.B, KeyType.A }, Element.Plant, Element.Bone
 			),
 
 			new KeySequence
 			(
-				"Fluid Bullet", new KeyType[] { KeyType.B, KeyType.D, KeyType.Trigger }, Element.Fluid, Element.Bone
+				"Fluid Bullet", new KeyType[] { KeyType.B, KeyType.D }, Element.Fluid, Element.Bone
 			),
 
 			new KeySequence
 			(
-				"Mineral Bullet", new KeyType[] { KeyType.B, KeyType.C, KeyType.Trigger},  Element.Bone, Element.Mineral
+				"Mineral Bullet", new KeyType[] { KeyType.B, KeyType.C},  Element.Bone, Element.Mineral
 			),
 
 			new KeySequence
 			(
-				"Bone Machine Gun", new KeyType[] { KeyType.B, KeyType.C, KeyType.B, KeyType.Trigger }, Element.Bone, Element.Bone
+				"Bone Machine Gun", new KeyType[] { KeyType.B, KeyType.C, KeyType.B }, Element.Bone, Element.Bone
 			),
 
 			new KeySequence
 			(
-				"Plant Machine Gun", new KeyType[] { KeyType.A, KeyType.B, KeyType.A, KeyType.Trigger }, Element.Plant, Element.Bone
+				"Plant Machine Gun", new KeyType[] { KeyType.A, KeyType.B, KeyType.A }, Element.Plant, Element.Bone
 			),
 
 			new KeySequence
 			(
-				"Fluid Machine Gun", new KeyType[] { KeyType.D, KeyType.C, KeyType.D, KeyType.Trigger }, Element.Fluid, Element.Bone
+				"Fluid Machine Gun", new KeyType[] { KeyType.D, KeyType.C, KeyType.D }, Element.Fluid, Element.Bone
 			),
 
 			new KeySequence
 			(
-				"Mineral Machine Gun", new KeyType[] { KeyType.C, KeyType.B, KeyType.C, KeyType.Trigger }, Element.Mineral, Element.Bone
+				"Mineral Machine Gun", new KeyType[] { KeyType.C, KeyType.B, KeyType.C }, Element.Mineral, Element.Bone
 			),
 
 			new KeySequence
 			(
-				"Bone Fire", new KeyType[] { KeyType.B, KeyType.B, KeyType.D, KeyType.D, KeyType.Trigger }, Element.Bone, Element.Fluid
+				"Bone Fire", new KeyType[] { KeyType.B, KeyType.B, KeyType.D, KeyType.D }, Element.Bone, Element.Fluid
 			),
 
 			new KeySequence
 			(
-				"Plant Fire", new KeyType[] { KeyType.A, KeyType.D, KeyType.D, KeyType.A, KeyType.Trigger }, Element.Plant, Element.Bone
+				"Plant Fire", new KeyType[] { KeyType.A, KeyType.D, KeyType.D, KeyType.A }, Element.Plant, Element.Bone
 			),
 
 			new KeySequence
 			(
-				"Fluid Fire", new KeyType[] { KeyType.D, KeyType.D, KeyType.D, KeyType.A, KeyType.Trigger }, Element.Fluid, Element.Plant
+				"Fluid Fire", new KeyType[] { KeyType.D, KeyType.D, KeyType.D, KeyType.A }, Element.Fluid, Element.Plant
 			),
 
 			new KeySequence
 			(
-				"Mineral Fire", new KeyType[] { KeyType.C, KeyType.A, KeyType.D, KeyType.B, KeyType.Trigger }, Element.Mineral, Element.Mineral
+				"Mineral Fire", new KeyType[] { KeyType.C, KeyType.A, KeyType.D, KeyType.B }, Element.Mineral, Element.Mineral
 			)
 		};
 

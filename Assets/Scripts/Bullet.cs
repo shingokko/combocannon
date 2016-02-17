@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour {
  	}
 
 	void Update () {
-        if (_dead || _destination == null) { return; }
+        if (_dead) { return; }
 
 		EnsureDestination();
 

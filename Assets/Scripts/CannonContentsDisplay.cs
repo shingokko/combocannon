@@ -15,6 +15,7 @@ public class CannonContentsDisplay : MonoBehaviour
 
     AudioSource _poofAudio;
     AudioSource _successAudio;
+    AudioSource _fullAudio;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class CannonContentsDisplay : MonoBehaviour
 
         _poofAudio = transform.Find("Poof").GetComponent<AudioSource>();
         _successAudio = transform.Find("Success").GetComponent<AudioSource>();
+        _fullAudio = transform.Find("Full").GetComponent<AudioSource>();
     }
 
     public void AddIconByKeyType(KeyType keyType)
@@ -106,6 +108,17 @@ public class CannonContentsDisplay : MonoBehaviour
 
         // icons should be all removed now, re-instantiate list
         _icons = new List<GameObject>();
+    }
+
+    public void IndicateFull()
+    {
+        _fullAudio.Play();
+
+        foreach (var icon in _icons)
+        {
+            var animator = icon.GetComponent<Animator>();
+            animator.Play("element-icon-shake");
+        }
     }
 
     void PlayPoof()

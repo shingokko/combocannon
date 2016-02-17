@@ -7,9 +7,7 @@ using System.Collections.Generic;
 [RequireComponent(typeof(GunPrefabs))]
 public class Gun : MonoBehaviour
 {
-    bool _trackingKeys;
-    float _currentTime;
-    float _allowedTime = 1.8f;
+    int _keyCapacity = 5;
 
     bool _actionInQueue;
     string _actionName;
@@ -53,150 +51,106 @@ public class Gun : MonoBehaviour
 
         GameObject ingredient = null;
 
-    	if (key == KeyType.A) {
-    		switch (ingredientVersion) {
-    			case 1:
+        if (key == KeyType.A) {
+            switch (ingredientVersion) {
+                case 1:
                     ingredient = _gunPrefabs.plantIngredient1;
-    				break;
-				case 2:
+                    break;
+                case 2:
                     ingredient = _gunPrefabs.plantIngredient2;
-					break;
-				default:
+                    break;
+                default:
                     ingredient = _gunPrefabs.plantIngredient3;
-					break;
-    		}
-    	}
+                    break;
+            }
+        }
 
-    	if (key == KeyType.B) {
-    		switch (ingredientVersion) {
-    			case 1:
+        if (key == KeyType.B) {
+            switch (ingredientVersion) {
+                case 1:
                     ingredient = _gunPrefabs.boneIngredient1;
-    				break;
-				case 2:
+                    break;
+                case 2:
                     ingredient = _gunPrefabs.boneIngredient2;
-					break;
-				default:
+                    break;
+                default:
                     ingredient = _gunPrefabs.boneIngredient3;
-					break;
-    		}
-    	}
+                    break;
+            }
+        }
 
-    	if (key == KeyType.C) {
-    		switch (ingredientVersion) {
-    			case 1:
+        if (key == KeyType.C) {
+            switch (ingredientVersion) {
+                case 1:
                     ingredient = _gunPrefabs.mineralIngredient1;
-    				break;
-				case 2:
+                    break;
+                case 2:
                     ingredient = _gunPrefabs.mineralIngredient2;
-					break;
-				default:
+                    break;
+                default:
                     ingredient = _gunPrefabs.mineralIngredient3;
-					break;
-    		}
-    	}
+                    break;
+            }
+        }
 
-    	if (key == KeyType.D) {
-    		switch (ingredientVersion) {
-    			case 1:
+        if (key == KeyType.D) {
+            switch (ingredientVersion) {
+                case 1:
                     ingredient = _gunPrefabs.fluidIngredient1;
-    				break;
-				case 2:
+                    break;
+                case 2:
                     ingredient = _gunPrefabs.fluidIngredient2;
-					break;
-				default:
+                    break;
+                default:
                     ingredient = _gunPrefabs.fluidIngredient3;
-					break;
-    		}
-    	}
+                    break;
+            }
+        }
 
-    	if (ingredient != null) {
-			Instantiate(ingredient);
-    	}
-	}
+        if (ingredient != null) {
+            Instantiate(ingredient);
+        }
+    }
 
-	void TrackKeys() {
-		var currentKeyCount = _keys.Count;
-		var keyPressed = KeyType.Unknown;
-		if (EnemyHealth.Instance.currentHealth <= 0) {
-			return;
-		}
+    KeyType DetectKeyPressed() {
+        var keyPressed = KeyType.Unknown;
 
         if (Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.A))) {
-        	_keys.Add(KeyType.A);
-        	keyPressed = KeyType.A;
+            keyPressed = KeyType.A;
         }
 
         if (Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.B))) {
-        	_keys.Add(KeyType.B);
-        	keyPressed = KeyType.B;
+            keyPressed = KeyType.B;
         }
 
         if (Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.C))) {
-        	_keys.Add(KeyType.C);
-        	keyPressed = KeyType.C;
+            keyPressed = KeyType.C;
         }
 
         if (Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.D))) {
-        	_keys.Add(KeyType.D);
-        	keyPressed = KeyType.D;
+            keyPressed = KeyType.D;
         }
 
-        if (Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.Trigger))) {
-        	_keys.Add(KeyType.Trigger);
-        	keyPressed = KeyType.Trigger;
+        return keyPressed;
+    }
+
+    void TrackKeys() {
+        if (EnemyHealth.Instance.currentHealth <= 0) { return; }
+
+        var keyToAdd = DetectKeyPressed();
+
+        if (keyToAdd == KeyType.Unknown) { return; }
+
+        if (_keys.Count < _keyCapacity) {
+            _keys.Add(keyToAdd);
+
+            OpenCauldron();
+            SpawnIngredient(keyToAdd);
+            _cannonContentsDisplay.AddIconByKeyType(keyToAdd);
         }
-
-        if (currentKeyCount == 0 && _keys.Count > 0)
-        {
-            _trackingKeys = true;
-        }
-
-        if (_keys.Count == 0)
-        {
-            _trackingKeys = false;
-        }
-        else
-        {
-            if (currentKeyCount == 0)
-            {
-                // start tracking keys, reset time
-                _trackingKeys = true;
-                _currentTime = 0;
-            }
-        }
-
-        var keySequenceIsValidSoFar = false;
-        foreach (var keySequence in _keySequences)
-        {
-            if (keySequence.CheckSoFar(_keys))
-            {
-                keySequenceIsValidSoFar = true;
-                break;
-            }
-        }
-
-        if (_trackingKeys)
-        {
-            _currentTime += Time.deltaTime;
-
-            if (_currentTime > _allowedTime)
-            {
-                _keys = new List<KeyType>();
-                Instantiate(_gunPrefabs.smoke);
-                _cannonContentsDisplay.ClearIcons();
-                _currentTime = 0;
-
-                SetIdle();
-            }
-            else
-            {
-                if (keySequenceIsValidSoFar)
-                {
-                    OpenCauldron();
-                    SpawnIngredient(keyPressed);
-                    _cannonContentsDisplay.AddIconByKeyType(keyPressed);
-                }
-            }
+        else {
+            _cannonContentsDisplay.IndicateFull();
+            Invoke("SetIdle", 0.4f);
         }
     }
 
@@ -218,6 +172,16 @@ public class Gun : MonoBehaviour
                 _keys = new List<KeyType>();
                 _cannonContentsDisplay.ClearIcons(false, true);
             }
+        }
+
+        // action is not in queue, no valid combo detected
+        if (!_actionInQueue)
+        {
+            _keys = new List<KeyType>();
+            Instantiate(_gunPrefabs.smoke);
+            _cannonContentsDisplay.ClearIcons();
+
+            SetIdle();
         }
     }
 
@@ -336,7 +300,12 @@ public class Gun : MonoBehaviour
     void Update()
     {
         TrackKeys();
-        QueueAction();
+
+        // if trigger pulled
+        if (_keys.Count > 0 && Controller.GetKeyDown(Preferences.Instance.getKeyCode(KeyType.Trigger))) {
+            QueueAction();
+        }
+
         TriggerAction();
 
         _enemyStatsTracker.RespawnEnemyIfDead();
