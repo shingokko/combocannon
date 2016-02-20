@@ -181,7 +181,7 @@ public class Gun : MonoBehaviour
             Instantiate(_gunPrefabs.smoke);
             _cannonContentsDisplay.ClearIcons();
 
-            SetIdle();
+            Invoke("CloseCauldron", 0.4f);
         }
     }
 
