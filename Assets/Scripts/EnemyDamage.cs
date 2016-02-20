@@ -45,7 +45,7 @@ public class EnemyDamage : MonoBehaviour {
 	
 	void PopUp(){
 		if(transform.position.y < 4.5f){
-			transform.position += new Vector3(0, 0.1f, 0);
+			transform.position += new Vector3(0, 0.2f, 0);
 		}else{
 			transform.position -= new Vector3(0, 0.3f, 0);
 		}
