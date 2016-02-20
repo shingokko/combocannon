@@ -31,11 +31,11 @@ public class EnemyStatsTracker : MonoBehaviour
             {
                 if (GameData.Instance.score % 1000 == 0)
                 {
-                    Summon(5);
+                    Summon(10);
                 }
                 else
                 {
-                    Summon(UnityEngine.Random.Range(1, 5));
+                    Summon(UnityEngine.Random.Range(1, 10));
                 }
 
                 _counter = 0;
@@ -65,6 +65,21 @@ public class EnemyStatsTracker : MonoBehaviour
                 break;
             case 5:
                 enemyName = "Monster5";
+                break;
+            case 6:
+                enemyName = "Monster6";
+                break;
+            case 7:
+                enemyName = "Monster7";
+                break;
+            case 8:
+                enemyName = "Monster8";
+                break;
+            case 9:
+                enemyName = "Monster9";
+                break;
+            case 10:
+                enemyName = "Monster10";
                 break;
             default:
                 enemyName = "Monster1";
@@ -101,7 +116,12 @@ public class EnemyStatsTracker : MonoBehaviour
         _enemyStatsList.Add(new EnemyStats(20, Element.Mineral));
         _enemyStatsList.Add(new EnemyStats(15, Element.Fluid));
         _enemyStatsList.Add(new EnemyStats(10, Element.Bone));
-        _enemyStatsList.Add(new EnemyStats(50, Element.Unknown));
+        _enemyStatsList.Add(new EnemyStats(35, Element.Unknown));
+        _enemyStatsList.Add(new EnemyStats(15, Element.Plant));
+        _enemyStatsList.Add(new EnemyStats(25, Element.Mineral));
+        _enemyStatsList.Add(new EnemyStats(20, Element.Fluid));
+        _enemyStatsList.Add(new EnemyStats(25, Element.Bone));
+        _enemyStatsList.Add(new EnemyStats(60, Element.Unknown));
     }
 
     public void ReduceEnemyHealth(Element attackWith, int basicDamage)

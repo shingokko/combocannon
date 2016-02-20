@@ -16,6 +16,7 @@ public class Monster : MonoBehaviour {
 	public int attackSpeed;
 	public int stunDamage;
 
+    AudioSource _attackAudio;
 
 	
 	// Use this for initialization
@@ -24,6 +25,7 @@ public class Monster : MonoBehaviour {
 		stun = false;
 		attack = false;
 
+        _attackAudio = GameObject.Find("Attack").GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -91,7 +93,9 @@ public class Monster : MonoBehaviour {
 			attack = true;
 			counter = 0;
 		}
-		if(counter == 50 && attack){
+        if(counter == 50 && attack){
+            _attackAudio.Play();
+
 			transform.localScale = new Vector3(2f, 2f,2f);
 			transform.position = new Vector3(0, -5f, 0);
 			PlayerHealth.Instance.shake = 1f;
