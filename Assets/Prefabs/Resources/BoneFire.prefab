@@ -39,8 +39,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 076c3e3773974e24da30d8c625f80cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 102686, guid: fcef702e6b136f94d904b2749e664682, type: 2}
-  bulletCount: 15
+  prefab: {fileID: 147838, guid: dcc78c3b2dd204e4d89c5347930133f3, type: 2}
+  bulletCount: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -55,6 +55,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 147838, guid: dcc78c3b2dd204e4d89c5347930133f3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: bulletCount
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
